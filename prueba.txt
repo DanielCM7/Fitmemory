@@ -1,3 +1,7 @@
 //Prueba de sincronizacion
 //Hola 
+<<<<<<< HEAD
 // Aquí estamos
+=======
+ya llego
+>>>>>>> 95999cdec50617171f01fd5f5c1023c065f8efba
