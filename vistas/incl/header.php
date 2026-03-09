@@ -73,7 +73,7 @@
 
         <img
           class="mb-4"
-          src="../assets/brand/CB0E31FB-D18E-4582-85D5-47B13AA82F4D.png"
+          src="./assets/brand/CB0E31FB-D18E-4582-85D5-47B13AA82F4D.png"
           alt="Logo de Fitmemory"
           width="300"
           height="150"
