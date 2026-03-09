@@ -14,8 +14,8 @@
       rel="canonical"
       href="index.php"
     />
-    <link href="/workspacevc/Fitmemory/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/workspacevc/Fitmemory/assets/dist/css/sign-in.css" rel="stylesheet" />
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/dist/css/sign-in.css" rel="stylesheet" />
     
     <style>
       .bd-placeholder-img {
