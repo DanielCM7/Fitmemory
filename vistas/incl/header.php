@@ -12,10 +12,10 @@
     <title>Fitmemory</title>
     <link
       rel="canonical"
-      href="/workspacevc/Fitmemory/index.php"
+      href="index.php"
     />
-    <link href="/workspacevc/Fitmemory/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/workspacevc/Fitmemory/assets/dist/css/sign-in.css" rel="stylesheet" />
+    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./assets/dist/css/sign-in.css" rel="stylesheet" />
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -68,12 +68,12 @@
     </style>
 </head>
 <body class="bg-body-tertiary">
-<header class="w-100 text-center py-4>
+<header class="w-100 text-center py-4">
      <div class="d-flex justify-content-center">
 
         <img
           class="mb-4"
-          src="/workspacevc/Fitmemory/assets/brand/CB0E31FB-D18E-4582-85D5-47B13AA82F4D.png"
+          src="./assets/brand/CB0E31FB-D18E-4582-85D5-47B13AA82F4D.png"
           alt="Logo de Fitmemory"
           width="300"
           height="150"

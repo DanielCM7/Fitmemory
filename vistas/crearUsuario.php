@@ -12,7 +12,7 @@
     <title>Fitmemory</title>
     <link
       rel="canonical"
-      href="/workspacevc/Fitmemory/index.php"
+      href="index.php"
     />
     <link href="/workspacevc/Fitmemory/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/workspacevc/Fitmemory/assets/dist/css/sign-in.css" rel="stylesheet" />

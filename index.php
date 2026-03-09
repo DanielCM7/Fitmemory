@@ -12,10 +12,10 @@
     <title>Fitmemory</title>
     <link
       rel="canonical"
-      href="/workspacevc/Fitmemory/index.php"
+      href="index.php"
     />
-    <link href="/workspacevc/Fitmemory/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/workspacevc/Fitmemory/assets/dist/css/sign-in.css" rel="stylesheet" />
+    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./assets/dist/css/sign-in.css" rel="stylesheet" />
     
     <style>
       .bd-placeholder-img {
@@ -121,7 +121,7 @@
       </form>
     </main>
     <script
-      src="/workspacevc/Fitmemory/assets/dist/js/bootstrap.bundle.min.js"
+      src="./assets/dist/js/bootstrap.bundle.min.js"
       class="astro-vvvwv3sm"
     ></script>
   </body>
