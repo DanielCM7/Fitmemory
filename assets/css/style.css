@@ -1,0 +1,527 @@
+/* ==================================================
+   FITMEMORY - ESTILOS GENERALES
+   ================================================== */
+
+:root {
+  --color-fondo-1: #0f172a;
+  --color-fondo-2: #1e293b;
+  --color-panel: rgba(15, 23, 42, 0.9);
+  --color-panel-secundario: rgba(30, 41, 59, 0.82);
+  --color-borde: rgba(255, 255, 255, 0.12);
+  --color-texto: #e5e7eb;
+  --color-texto-suave: #94a3b8;
+  --color-primario: #2563eb;
+  --color-primario-hover: #1d4ed8;
+  --color-secundario: #0ea5e9;
+  --color-exito: #22c55e;
+  --sombra-principal: 0 14px 40px rgba(0, 0, 0, 0.35);
+  --radio-grande: 20px;
+  --radio-medio: 14px;
+  --radio-pequeno: 10px;
+  --transicion: all 0.25s ease;
+}
+
+/* ==================================================
+   RESET BÁSICO
+   ================================================== */
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ==================================================
+   BODY Y CONTENEDOR GENERAL
+   ================================================== */
+
+.app-body {
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--color-texto);
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(37, 99, 235, 0.2),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(14, 165, 233, 0.14),
+      transparent 24%
+    ),
+    linear-gradient(135deg, var(--color-fondo-1), var(--color-fondo-2));
+  background-attachment: fixed;
+}
+
+.app-main {
+  width: 100%;
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 1rem;
+  position: relative;
+}
+
+/* ==================================================
+   HEADER
+   ================================================== */
+
+.app-header {
+  width: 100%;
+  text-align: center;
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.app-header-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-logo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 1rem auto;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
+}
+
+/* ==================================================
+   PANELES
+   ================================================== */
+
+.panel-formulario,
+.panel-dashboard {
+  background: var(--color-panel);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-grande);
+  box-shadow: var(--sombra-principal);
+  backdrop-filter: blur(10px);
+}
+
+.panel-formulario {
+  padding: 2rem;
+}
+
+.panel-dashboard {
+  padding: 2.25rem 1.5rem;
+  margin-top: 5rem !important;
+}
+
+/* ==================================================
+   FORMULARIOS
+   ================================================== */
+
+.login-formulario,
+.formulario-usuario {
+  width: 100%;
+}
+
+.formulario-fila {
+  margin-bottom: 1.25rem !important;
+}
+
+.formulario-label {
+  color: var(--color-texto);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  font-size: 0.95rem;
+}
+
+.formulario-campo {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radio-medio);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  box-shadow: none;
+  transition: var(--transicion);
+}
+
+.formulario-campo::placeholder {
+  color: var(--color-texto-suave);
+}
+
+.formulario-campo:focus {
+  outline: none;
+  border-color: rgba(37, 99, 235, 0.95);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.18);
+}
+
+.formulario-acciones {
+  margin-top: 0.5rem;
+}
+
+.acciones-login {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.acciones-login .btn {
+  flex: 0 1 auto;
+}
+
+.acciones-formulario-centro {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.75rem;
+}
+
+.acciones-formulario-centro .btn {
+  min-width: 180px;
+}
+
+/* ==================================================
+   CHECKBOX
+   ================================================== */
+
+.form-check {
+  margin-top: 0.35rem;
+}
+
+.form-check-label {
+  color: var(--color-texto-suave);
+  font-size: 0.95rem;
+}
+
+.form-check-input {
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.form-check-input:checked {
+  background-color: var(--color-primario);
+  border-color: var(--color-primario);
+}
+
+/* ==================================================
+   BOTONES GENERALES
+   ================================================== */
+
+.btn {
+  border-radius: var(--radio-medio);
+  font-weight: 700;
+  transition: var(--transicion);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.boton-principal,
+.boton-secundario,
+.dashboard-boton {
+  border: none;
+  color: #ffffff;
+}
+
+.boton-principal,
+.dashboard-boton {
+  background: linear-gradient(
+    135deg,
+    var(--color-primario),
+    var(--color-secundario)
+  );
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.28);
+}
+
+.boton-principal:hover,
+.dashboard-boton:hover {
+  background: linear-gradient(
+    135deg,
+    var(--color-primario-hover),
+    var(--color-primario)
+  );
+  color: #ffffff;
+  box-shadow: 0 14px 26px rgba(37, 99, 235, 0.36);
+}
+
+.boton-secundario {
+  background: linear-gradient(
+    135deg,
+    var(--color-primario),
+    var(--color-secundario)
+  );
+  border: none;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.28);
+}
+
+.boton-secundario:hover {
+  background: linear-gradient(
+    135deg,
+    var(--color-primario-hover),
+    var(--color-primario)
+  );
+  color: #ffffff;
+  box-shadow: 0 14px 26px rgba(37, 99, 235, 0.36);
+}
+
+.boton-principal {
+  padding: 0.9rem 1.4rem;
+}
+
+.dashboard-boton {
+  min-height: 64px;
+  font-size: 1.02rem;
+  border-radius: 16px;
+}
+
+/* ==================================================
+   ACCIONES FLOTANTES
+   ================================================== */
+
+.acciones-flotantes {
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  padding: 0.8rem;
+  border-radius: 16px;
+  box-shadow: var(--sombra-principal);
+}
+
+/* ==================================================
+   TOPBAR
+   ================================================== */
+
+.topbar-izquierda,
+.topbar-derecha {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 1.5rem;
+  z-index: 1000;
+}
+
+.topbar-izquierda {
+  left: 1.5rem;
+}
+
+.topbar-derecha {
+  right: 1.5rem;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.topbar-enlace {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0.55rem 0.9rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  color: var(--color-texto);
+  font-weight: 600;
+  transition: var(--transicion);
+}
+
+.topbar-enlace i,
+.topbar-boton i {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.topbar-enlace:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.24);
+  transform: translateY(-1px);
+}
+
+.topbar-boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-texto);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  padding: 0.55rem 0.9rem;
+}
+
+.topbar-boton:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+/* ==================================================
+   DASHBOARD
+   ================================================== */
+
+.dashboard-acciones {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.dashboard-acciones-dobles .dashboard-boton {
+  flex: 1 1 0;
+}
+
+.dashboard-acciones-simple {
+  justify-content: center;
+}
+
+.dashboard-acciones-simple .dashboard-boton {
+  width: min(100%, 360px);
+}
+
+.panel-dashboard .dashboard-acciones + .dashboard-acciones {
+  margin-top: 1rem;
+}
+
+.panel-dashboard i.bi {
+  font-size: 1.1rem;
+}
+
+/* ==================================================
+   TEXTOS Y UTILIDADES
+   ================================================== */
+
+.text-decoration-none {
+  text-decoration: none !important;
+}
+
+/* ==================================================
+   AJUSTES DE FORM-CONTROL DE BOOTSTRAP
+   ================================================== */
+
+.form-control {
+  border-radius: var(--radio-medio);
+}
+
+.form-control:focus {
+  border-color: rgba(37, 99, 235, 0.95);
+}
+
+/* ==================================================
+   RESPONSIVE
+   ================================================== */
+
+@media (max-width: 992px) {
+  .app-main {
+    max-width: 760px;
+  }
+
+  .panel-dashboard {
+    margin-top: 4.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-main {
+    padding: 0.75rem;
+  }
+
+  .panel-formulario,
+  .panel-dashboard {
+    padding: 1.35rem;
+  }
+
+  .panel-dashboard {
+    margin-top: 1.5rem !important;
+  }
+
+  .formulario-label {
+    margin-bottom: 0.35rem;
+  }
+
+  .acciones-flotantes {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem !important;
+    margin: 0 !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: stretch;
+  }
+
+  .acciones-flotantes .btn {
+    flex: 1 1 100%;
+  }
+
+  .acciones-login {
+    justify-content: stretch;
+  }
+
+  .acciones-login .btn {
+    flex: 1 1 100%;
+  }
+
+  .topbar-izquierda,
+  .topbar-derecha {
+    position: static !important;
+    margin: 0.5rem 0 !important;
+  }
+
+  .topbar-derecha {
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem !important;
+  }
+
+  .topbar-izquierda {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .dashboard-acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem !important;
+  }
+
+  .dashboard-acciones-simple .dashboard-boton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .app-logo {
+    width: 220px;
+  }
+
+  .formulario-campo {
+    min-height: 44px;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .boton-principal,
+  .dashboard-boton {
+    font-size: 0.95rem;
+  }
+
+  .topbar-boton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .topbar-enlace {
+    width: 100%;
+  }
+}
