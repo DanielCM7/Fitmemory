@@ -1,128 +1,41 @@
-<!doctype html>
-<html lang="es" data-bs-theme="dark">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta
-      name="author"
-      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
-    />
-    <meta name="generator" content="Astro v5.13.2" />
-    <title>Fitmemory</title>
-    <link
-      rel="canonical"
-      href="index.php"
-    />
-    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="./assets/dist/css/sign-in.css" rel="stylesheet" />
-    
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-      .b-example-divider {
-        width: 100%;
-        height: 3rem;
-        background-color: #0000001a;
-        border: solid rgba(0, 0, 0, 0.15);
-        border-width: 1px 0;
-        box-shadow:
-          inset 0 0.5em 1.5em #0000001a,
-          inset 0 0.125em 0.5em #00000026;
-      }
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-      .bi {
-        vertical-align: -0.125em;
-        fill: currentColor;
-      }
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
-  
-    </style>
-    
-  </head>
-  <body class="d-flex align-items-center py-4 bg-body-tertiary">
+<?php
+//NOTA DE PAULA: Tomo de referencia la estructura que aprendí para EduFlow, me parece que deja un index bastante limpio sin que la primera página sea una vista y centraliza todo a través del index.
 
-    <main class="form-signin w-100 m-auto">
-        <?php include "vistas/incl/header.php";?>
-      <form>
-     
-       <div class="row mb-3 align-items-center">
-      <label for="floatingInput" class="col-sm-4 col-form-label">USUARIO:</label>
-      <div class="col-sm-8">
-          <input type="text"
-            class="form-control"
-            id="floatingInput"
-            placeholder="usuario">
-          </div>
-          
-        </div>
-        <div class="row mb-3 align-items-center">
-        <label for="floatingInput" class="col-sm-4 col-form-label">CONTRASEÑA:</label>  
-        <div class="col-sm-8">
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="contraseña"
-          />
-        </div>
-        <div class="d-flex justify-content-end mb-3">
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value="remember-me"
-            id="checkDefault"
-          />
-          <label class="form-check-label" for="checkDefault">
-            Recuerdame
-          </label>
-        </div>
-        </div>
-        </div>
-      <div class="position-fixed bottom-0 end-0 mb-4 me-4 d-flex gap-2">
-        <button class="btn btn-primary btn-lg" type="submit">
-          Iniciar Sesión
-        </button>
-        <button class="btn btn-primary btn-lg" type="submit">
-          Crear Usuario
-        </button>
-      </div>
-   
-      </form>
-    </main>
-    <script
-      src="./assets/dist/js/bootstrap.bundle.min.js"
-      class="astro-vvvwv3sm"
-    ></script>
-  </body>
-</html>
+// Requerimos las funciones
+include_once 'src/controlador/funciones_controlador.php';
+
+// Usamos la función inicializa la sesión, usamos un if que evite un NOTICE en XAMPP
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Comprobamos si el parámetro público 'vista' NO está definido
+if (!isset($_GET['vista'])) {
+    // Si NO está definido, comprobamos si el parámetro público de sesión 'usuario' está definido
+    if (isset($_SESSION['perfil'])) {
+        // Si 'perfil' está definido, comprobamos el tipo de usuario y lo enviamos a su correspondiente dashboard
+        if ($_SESSION['perfil']=="admin") {
+            header('Location: ./index.php?vista=adminDashboard');
+        }
+        if ($_SESSION['perfil']=="cliente") {
+            header('Location: ./index.php?vista=clienteDashboard');
+        }
+        if ($_SESSION['perfil']=="entrenador") {
+            header('Location: ./index.php?vista=entrenadorDashboard');
+        }
+    } else {
+        // Si 'perfil' NO está definido, agrega el valor inicio a vista para redirigir al formulario de inicio si no se está logueado
+        header('Location: ./index.php?vista=inicio');
+    }
+} else {
+    // Si el parámetro 'vista' NO está definido pero el usuario sí
+    if (isset($_SESSION['usuario'])) {
+        // Llamamos a la función de cierre Programado
+        cierreProgramado();
+    }
+}
+
+// Llamamos a la función del controlador que enruta según el valor de vista
+enrute();
+
+?>

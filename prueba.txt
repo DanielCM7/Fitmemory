@@ -1,8 +1,0 @@
-//Prueba de sincronizacion
-//Hola 
-<<<<<<< HEAD
-ya llego 
-desde visual studio
-=======
-// Aquí estamos
->>>>>>> f84d7603c7ec12067639cedccece73bab060fed1

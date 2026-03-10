@@ -85,7 +85,7 @@
 </a>
 </div>
 <div class="position-absolute top-0 end-0 m-3">
-  <button class="btn btn-outline-light btn-sm d-flex align-items-center gap-1 btn-top-header">
+  <button class="btn btn-outline-light btn-sm d-flex align-items-center gap-1 btn-top-header" onclick="window.location.href='src/controlador/cierre_sesion.php'">
     <i class="bi bi-arrow-bar-right"></i>
     <span class="d-none d-sm-inline">Cerrar Sesión</spam>
 </button>

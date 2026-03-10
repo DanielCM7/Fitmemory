@@ -423,10 +423,11 @@ CREATE TABLE `sesiones_ejercicios` (
 CREATE TABLE `usuarios` (
   `id_usuario` int(10) NOT NULL,
   `id_rol` int(10) NOT NULL,
+  `nombre_usuario` varchar(255) NOT NULL UNIQUE, -- Paula: Añado esto para poder iniciar sesión y que sea único
   `nombre` varchar(255) NOT NULL,
   `apellidos` varchar(255) NOT NULL,
   `edad` int(10) NOT NULL,
-  `contrasenia_hash` varchar(255) NOT NULL,
+  `contrasena_hash` varchar(255) NOT NULL,
   `perfil` enum('cliente','entrenador','','') NOT NULL,
   `fecha_registro` datetime NOT NULL,
   `activo` int(2) NOT NULL
@@ -436,11 +437,14 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `id_rol`, `nombre`, `apellidos`, `edad`, `contrasenia_hash`, `perfil`, `fecha_registro`, `activo`) VALUES
-(1, 1, 'David', 'Hernandez Rodriguez', 33, '1234567890', 'cliente', '2026-03-08 19:54:38', 1),
-(2, 2, 'Paula', 'Serrano Torrecillas', 33, '1234567890', 'cliente', '2026-03-08 19:54:24', 1),
-(3, 1, 'Daniel', 'Cortés Martín', 33, '123456789', 'cliente', '2026-03-08 19:51:14', 1),
-(4, 1, ' Itziar', 'Etxebeste Etxeberria', 33, '123456789', 'cliente', '2026-03-08 19:51:14', 1);
+-- Paula: He cambiado las contraseñas para que estén con el hash hecho con sha256 como vimos en clase
+-- Las contraseñas son todas ahora mismo 123456
+
+INSERT INTO `usuarios` (`id_usuario`, `id_rol`, `nombre_usuario`, `nombre`, `apellidos`, `edad`, `contrasena_hash`, `perfil`, `fecha_registro`, `activo`) VALUES
+(1, 1, 'dokiluz', 'David', 'Hernandez Rodriguez', 33, '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'cliente', '2026-03-08 19:54:38', 1),
+(2, 2, 'staluap','Paula', 'Serrano Torrecillas', 33, '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'cliente', '2026-03-08 19:54:24', 1),
+(3, 1, 'danielCM','Daniel', 'Cortés Martín', 33, '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'cliente', '2026-03-08 19:51:14', 1),
+(4, 1, 'itziar', 'Itziar', 'Etxebeste Etxeberria', 33, '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'cliente', '2026-03-08 19:51:14', 1);
 
 --
 -- Índices para tablas volcadas

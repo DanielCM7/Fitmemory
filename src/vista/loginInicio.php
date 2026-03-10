@@ -14,8 +14,8 @@
       rel="canonical"
       href="index.php"
     />
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../assets/dist/css/sign-in.css" rel="stylesheet" />
+    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./assets/dist/css/sign-in.css" rel="stylesheet" />
     
     <style>
       .bd-placeholder-img {
@@ -72,68 +72,62 @@
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
 
     <main class="form-signin w-100 m-auto">
-       <?php include "incl/header.php";?>
-      <form>
-     
-       <div class="row mb-3 align-items-center">
-      <label class="col-sm-4 col-form-label text-start">USUARIO:</label>
-      <div class="col-sm-8">
-          <input type="text"
-          class="form-control"
-            id="idUsuario"
-            placeholder="usuario">
-          </div>
-</div>
+        <?php include "src/vista/incl/header.php";?>
 
-        <div class="row mb-3 align-items-center">
-      <label class="col-sm-4 col-form-label text-start">NOMBRE:</label>
+      <!-- Paula: añado en la etiqueta form que se dirija al controlador que revisa con la BBDD las credenciales y también el método de envío del formulario (POST, por seguridad) -->
+      <form action="src/controlador/control_inicio.php" method="POST">
+       <div class="row mb-3 align-items-center">
+      <!-- Paula: Voy a dar nomenclatura a los campos de formulario o si no es muy difícil de distinguir y procesar con php y la BBDD, y sobre todo si falta 'name' -->
+      <label for="usuario" class="col-sm-4 col-form-label">USUARIO:</label>
       <div class="col-sm-8">
           <input type="text"
             class="form-control"
-            id="idNombre"
-            placeholder="nombre">
-          </div>  
-</div>
-        <div class="row mb-3 align-items-center">
-      <label class="col-sm-4 col-form-label text-start">APELLIDOS:</label>
-      <div class="col-sm-8">
-          <input type="text"
-            class="form-control"
-            id="idApellidos"
-            placeholder="apellidos">
-        </div>
-</div>
-         <div class="row mb-3 align-items-center">
-      <label class="col-sm-4 col-form-label text-start">EDAD:</label>
-      <div class="col-sm-8">
-          <input type="number"
-            class="form-control"
-            id="idEdad"
-            placeholder="edad">
-          </div>  
-</div>
-         <div class="row mb-3 align-items-center">
-      <label class="col-sm-4 col-form-label text-start">PERFIL:</label>
-      <div class="col-sm-8">
-          <input type="text"
-            class="form-control"
-            id="idPerfil"
-            placeholder="perfil">
+            id="usuario"
+            placeholder="usuario"
+            name="usuario">
           </div>
-</div>
+          
+        </div>
         <div class="row mb-3 align-items-center">
-        <label class="col-sm-4 col-form-label text-start">CONTRASEÑA:</label>  
+        <label for="contrasena" class="col-sm-4 col-form-label">CONTRASEÑA:</label>  
         <div class="col-sm-8">
           <input
             type="password"
             class="form-control"
-            id="IdPassword"
+            id="contrasena"
             placeholder="contraseña"
+            name="contrasena"
           />
-           </div>
         </div>
-        <div class="position-fixed bottom-0 end-0 mb-4 me-4 d-flex gap-2">
+        <div class="d-flex justify-content-end mb-3">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="remember-me"
+            id="checkDefault"
+          />
+          <label class="form-check-label" for="checkDefault">
+            Recuerdame
+          </label>
+        </div>
+        </div>
+        </div>
+      <div class="position-fixed bottom-0 end-0 mb-4 me-4 d-flex gap-2">
         <button class="btn btn-primary btn-lg" type="submit">
-          Continuar
+          Iniciar Sesión
         </button>
-</div>
+        <!-- Paula: He cambiado que este botón sea submit, para que no acccion el action del formulario. -->
+        <button class="btn btn-primary btn-lg" type="button" onclick="window.location.href='index.php?vista=crearUsuario'">
+          Crear Usuario
+        </button>
+      </div>
+   
+      </form>
+    </main>
+    <script
+      src="./assets/dist/js/bootstrap.bundle.min.js"
+      class="astro-vvvwv3sm"
+    ></script>
+  </body>
+</html>
