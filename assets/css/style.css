@@ -397,6 +397,11 @@ body {
 .panel-dashboard i.bi {
   font-size: 1.1rem;
 }
+.bienvenida {
+text-align: center;
+font-size: 2rem;
+font-weight: bold;
+}
 
 /* ==================================================
    TEXTOS Y UTILIDADES

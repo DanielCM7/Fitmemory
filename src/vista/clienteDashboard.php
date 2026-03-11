@@ -48,7 +48,7 @@
           <span class="d-none d-sm-inline">Editar Perfil</span>
         </button>
       </div>
-
+        <p class="bienvenida"> Hola <?php echo $_SESSION['usuario']?>, ¡Bienvenido a Fitmemory!</p>
       <div class="container text-center mt-5 panel-dashboard">
         <div class="dashboard-acciones dashboard-acciones-dobles mb-3">
           <button
