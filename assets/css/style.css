@@ -158,6 +158,18 @@ body {
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.18);
 }
 
+/* Focus para inputs válidos */
+.formulario-campo.exito:focus {
+    border-color: #09c372 !important;
+    box-shadow: 0 0 0 4px rgba(9, 195, 114, 0.25) !important;
+}
+
+/* Focus para inputs con error */
+.formulario-campo.error:focus {
+    border-color: #ff3860 !important;
+    box-shadow: 0 0 0 4px rgba(214, 42, 42, 0.25) !important;
+}
+
 .formulario-acciones {
   margin-top: 0.5rem;
 }
@@ -184,6 +196,11 @@ body {
 
 .acciones-formulario-centro .btn {
   min-width: 180px;
+}
+
+select option {
+  background: rgb(62, 62, 77);
+  color: #ffffff;
 }
 
 /* ==================================================
@@ -423,6 +440,31 @@ font-weight: bold;
   border-color: rgba(37, 99, 235, 0.95);
 }
 
+/* Añado estos elementos para avisos de validación */
+.exito input, .exito select {
+    border-color: #09c372;
+}
+
+.error input, .error select {
+    border-color: #ff3860;
+}
+
+.exito input:focus, .exito select:focus {
+  border-color: #09c372;
+  box-shadow: 0 0 0 4px rgba(24, 195, 9, 0.2);
+}
+
+.error input:focus, .error select:focus {
+  border-color: #ff3860;
+  box-shadow: 0 0 0 4px rgba(214, 42, 42, 0.2);
+}
+
+.col-sm-8 >.error {
+    color: #ff3860;
+    font-size: 11px;
+    height: 13px;
+}
+
 /* ==================================================
    RESPONSIVE
    ================================================== */
@@ -529,4 +571,37 @@ font-weight: bold;
   .topbar-enlace {
     width: 100%;
   }
+}
+
+/* AUTOFILL (Chrome / Edge / Safari) */
+/* Para que los navegadores no reescriban en algunos casos el css */
+/* Mantener texto blanco y fondo del autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+select:-webkit-autofill,
+textarea:-webkit-autofill {
+    -webkit-text-fill-color: #ffffff;
+    -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0.06) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Focus general */
+.formulario-campo:focus {
+    outline: none;
+    border-color: rgba(37, 99, 235, 0.95);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.18);
+}
+
+/* Focus input válido */
+.formulario-campo.exito:focus {
+    border-color: #09c372 !important;
+    box-shadow: 0 0 0 4px rgba(9, 195, 114, 0.25) !important;
+}
+
+/* Focus input con error */
+.formulario-campo.error:focus {
+    border-color: #ff3860 !important;
+    box-shadow: 0 0 0 4px rgba(214, 42, 42, 0.25) !important;
 }

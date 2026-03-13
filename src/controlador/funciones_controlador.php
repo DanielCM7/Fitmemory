@@ -110,7 +110,11 @@ function enrute() {
 // Clase estática para realizar CRUD de la base de datos en la tabla de usuarios
 // TODO Ahora mismo la tabla carece de nombre de usuario o email que sea ÚNICO que diferencia a usuarios con el mismo nombre, otra opción es que el usuario entre con su id.
 
-class UsuarioControlador {
+class ControladorBD {
+
+// COMPROBAR QUE EXISTE __________________________________________________
+
+    // TABLA USUARIOS _________________________________________________
 
     // Método para buscar un usuario en base a su nombre de usuario
     public static function existeUsuario ($nombre_usuario) {
@@ -122,15 +126,74 @@ class UsuarioControlador {
         return $resultado ? $resultado[0] : null;
     }
 
+    // TABLA ROLES _________________________________________________
+
+    // Comprobar que existe un rol a través del id
+    public static function existeRolId ($id_rol) {
+        // Seleccionamos todos los registros con ese nombre de usuario. Al ser un campo único debe existir 1 o 0.
+        $consulta ="SELECT * FROM roles WHERE id_rol = ?";
+        // Se introduce la lectura de la consulta en una variable
+        $resultado = BaseDatos::consultaLectura ($consulta, $id_rol);
+        // Si existe resultado y no está vacía se devuelve la primera posición (y única) del array en el que se guarda
+        return $resultado ? $resultado[0] : null;
+    }
+
+    // Comprobar que existe un rol a través del nombre
+    public static function existeRolNombre ($nombre_rol) {
+        // Seleccionamos todos los registros con ese nombre de usuario. Al ser un campo único debe existir 1 o 0.
+        $consulta ="SELECT * FROM roles WHERE nombre_rol = ?";
+        // Se introduce la lectura de la consulta en una variable
+        $resultado = BaseDatos::consultaLectura ($consulta, $nombre_rol);
+        // Si existe resultado y no está vacía se devuelve la primera posición (y única) del array en el que se guarda
+        return $resultado ? $resultado[0] : null;
+    }
+
+// MÉTODOS GET __________________________________________________
+
+    // TABLA ROLES _____________________________________________
+
+    // Conseguir el id de un rol por el nombre del rol (cliente => 1)
+    public static function getRolIdPorNombreRol ($nombre_rol) {
+        $rol = ControladorBD::existeRolNombre($nombre_rol);
+        if (is_null($rol)){
+            return null;
+        } else {
+            return $rol['id_rol'];
+        }
+    }
+
+    // Averiguar rol usuario a través de un id_rol (1 => cliente)
+    public static function getRolUsuarioPorId($id_rol) {
+        $rol = ControladorBD::existeRolId($id_rol);
+        if (is_null($rol)){
+            return null;
+        } else {
+            return $rol['nombre_rol'];
+        }
+    }
+
+    // Averiguar rol de un usuario a través de su nombre (usuario => 1 => cliente)
+    public static function getRolUsuarioPorUsuario($nombre_usuario) {
+        $usuario = ControladorBD::existeUsuario($nombre_usuario);
+        if (is_null($usuario)){
+            return null;
+        } else {
+            $nombre_rol = ControladorBD::getRolUsuarioPorId($usuario['id_rol']);
+            return $nombre_rol;
+        }
+    }
+
+    // TABLA USUARIOS _____________________________________________
+
     // Método para obtener directamente el nombre de pila de un usuario en base a un usuario
-    public static function nombrePilaUser ($nombre_usuario) {
-        $usuario = UsuarioControlador::existeUsuario($nombre_usuario);
+    public static function getNombrePilaUser ($nombre_usuario) {
+        $usuario = ControladorBD::existeUsuario($nombre_usuario);
         // Si existe el usuario devolvemos el valor del campo nombre
         return $usuario ? $usuario['nombre'] : null;
     }
     // Método para obtener directamente los apellidos de un usuario en base a un usuario
-    public static function apellidosUser ($nombre_usuario) {
-        $usuario = UsuarioControlador::existeUsuario($nombre_usuario);
+    public static function getApellidosUser ($nombre_usuario) {
+        $usuario = ControladorBD::existeUsuario($nombre_usuario);
         // Si existe el usuario devolvemos el valor del campo nombre
         return $usuario ? $usuario['apellidos'] : null;
     }
@@ -146,14 +209,20 @@ class UsuarioControlador {
         return $resultado ? $resultado[0] : null;
     }
 
+// MÉTODOS DE CREACIÓN _____________________________________________________
+
+    // CREACIÓN DE USUARIOS ______________________________________________
+
     // Método de inserción para crear un nuevo registro en la tabla usuario (TANTO PARA ADMIN COMO CREAR NUEVO USUARIO DESDE INICIO)
-    public static function crearUsuario($nombre_usuario, $contrasena_hash, $nombre, $apellidos, $perfil, $edad) {
+    public static function crearUsuario($nombre_usuario, $contrasena_hash, $nombre, $apellidos, $id_rol, $fecha_nacimiento) {
         // Insertaremos todos los datos de la tabla menos aquellos como el nº de usuario y fecha que son automáticos
-        $consulta ="INSERT INTO usuarios (nombre_usuario, contrasena_hash, nombre, apellidos, perfil, edad) VALUES (?, ?, ?, ?, ?, ?)";
+        $consulta ="INSERT INTO usuarios (nombre_usuario, contrasena_hash, nombre, apellidos, id_rol, fecha_nacimiento) VALUES (?, ?, ?, ?, ?, ?)";
         // Usamos el método de inserción en vez de el de lectura
         // Integramos el 'hasheado' de la variable contraseña para que se escriba en la base de datos con esta codificación
-        return BaseDatos::consultaInsercion($consulta, $nombre_usuario, hash('sha256', $contrasena_hash), $nombre, $apellidos, $perfil, $edad);
+        return BaseDatos::consultaInsercion($consulta, $nombre_usuario, hash('sha256', $contrasena_hash), $nombre, $apellidos, $id_rol, $fecha_nacimiento);
     }
+
+//MÉTODOS DE MODIFICACIÓN ______________________________________________
 
     // CAMBIAR TU CONTRASEÑA COMO USUARIO
     // Metodo de actualización de datos (también de escritura en la BD)
@@ -167,11 +236,11 @@ class UsuarioControlador {
     // MÉTODOS PARA CRUD DE ADMINISTRADORES EN PANEL DE USUARIOS_______________________________________
 
     // Metodo de actualización de datos (también de escritura en la BD)
-    public static function actualizarUsuario($id_usuario, $contrasena_hash, $nombre, $apellidos, $perfil, $edad) {
+    public static function actualizarUsuario($id_usuario, $contrasena_hash, $nombre, $apellidos, $id_rol, $fecha_nacimiento) {
         // En base al id de usuario (que es único) localizamos al usuario y modificamos algunos parámetros (otros previamente establecidos quedan igual)
-        $consulta ="UPDATE usuarios SET contrasena_hash = ?, nombre_completo = ?, perfil = ? WHERE id_usuario = ?";
+        $consulta ="UPDATE usuarios SET contrasena_hash = ?, nombre_completo = ?, id_rol = ? WHERE id_usuario = ?";
         // Integramos el 'hasheado' de la variable contraseña para que se escriba en la base de datos con esta codificación
-        return BaseDatos::consultaInsercion($consulta, hash('sha256', $contrasena_hash), $nombre, $apellidos, $perfil, $edad, $id_usuario);
+        return BaseDatos::consultaInsercion($consulta, hash('sha256', $contrasena_hash), $nombre, $apellidos, $id_rol, $fecha_nacimiento, $id_usuario);
     }
 
     // Método de eliminar registros en la tabla usuario en base al id

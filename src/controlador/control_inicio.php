@@ -10,8 +10,8 @@ require_once 'funciones_controlador.php';
     }
     // Comprobamos que existen datos recogidos por el formulario
     if (isset($_POST['usuario']) && isset($_POST['contrasena'])) {
-        // Utilizamos el método login de nuestra clase UsuarioControlador para comprobar si existe un usuario con esa contraseña 'encriptada'
-        $usuario = UsuarioControlador::loginUsuario($_POST['usuario'], $_POST['contrasena']);
+        // Utilizamos el método login de nuestra clase ControladorBD para comprobar si existe un usuario con esa contraseña 'encriptada'
+        $usuario = ControladorBD::loginUsuario($_POST['usuario'], $_POST['contrasena']);
         // Si la consulta SQL existe en la tabla de usuarios
         if ($usuario) {
             // Definimos un id de sesión

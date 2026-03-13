@@ -302,7 +302,7 @@ INSERT INTO `grupos_musculares` (`id_grupo`, `nombre`, `descripcion`) VALUES
 
 CREATE TABLE `roles` (
   `id_rol` int(11) NOT NULL,
-  `nombre_rol` varchar(55) NOT NULL
+  `nombre_rol` varchar(55) NOT NULL UNIQUE -- importante que sea unique o dará problemas luego
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -421,14 +421,14 @@ CREATE TABLE `sesiones_ejercicios` (
 --
 
 CREATE TABLE `usuarios` (
-  `id_usuario` int(10) NOT NULL,
+  `id_usuario` int(10) UNSIGNED NOT NULL, -- He metido un unsigned para optimizar
   `id_rol` int(10) NOT NULL,
   `nombre_usuario` varchar(255) NOT NULL UNIQUE, -- Paula: Añado esto para poder iniciar sesión y que sea único
   `nombre` varchar(255) NOT NULL,
   `apellidos` varchar(255) NOT NULL,
-  `edad` int(10) NOT NULL,
+  `fecha_nacimiento` DATE NOT NULL, -- Cambio a fecha para poder calcular la edad con el paso del tiempo
   `contrasena_hash` varchar(255) NOT NULL,
-  `perfil` enum('cliente','entrenador','','') NOT NULL,
+  -- ELIMINO LA COLUMNA PERFIL, DA PROBLEMAS: Básicamente no esta unida a id_rol, por ejemplo si pones 2 debería ser entrenador, pero la falta de conexión deja poner cliente. Esto genera falta de coherencia. Dejamos sólo id_rol que es la foreign key que conecta con los roles bien.
   `fecha_registro` datetime NOT NULL,
   `activo` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -440,11 +440,11 @@ CREATE TABLE `usuarios` (
 -- Paula: He cambiado las contraseñas para que estén con el hash hecho con sha256 como vimos en clase
 -- Las contraseñas son todas ahora mismo 123456
 
-INSERT INTO `usuarios` (`id_usuario`, `id_rol`, `nombre_usuario`, `nombre`, `apellidos`, `edad`, `contrasena_hash`, `perfil`, `fecha_registro`, `activo`) VALUES
-(1, 1, 'dokiluz', 'David', 'Hernandez Rodriguez', 33, '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'cliente', '2026-03-08 19:54:38', 1),
-(2, 2, 'staluap','Paula', 'Serrano Torrecillas', 33, '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'cliente', '2026-03-08 19:54:24', 1),
-(3, 1, 'danielCM','Daniel', 'Cortés Martín', 33, '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'cliente', '2026-03-08 19:51:14', 1),
-(4, 1, 'itziar', 'Itziar', 'Etxebeste Etxeberria', 33, '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'cliente', '2026-03-08 19:51:14', 1);
+INSERT INTO `usuarios` (`id_usuario`, `id_rol`, `nombre_usuario`, `nombre`, `apellidos`, `fecha_nacimiento`, `contrasena_hash`, `fecha_registro`, `activo`) VALUES
+(1, 1, 'dokiluz', 'David', 'Hernandez Rodriguez', '1991-08-16', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:54:38', 1),
+(2, 2, 'staluap','Paula', 'Serrano Torrecillas', '1996-06-26', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:54:24', 1),
+(3, 1, 'danielCM','Daniel', 'Cortés Martín', '2001-01-15', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:51:14', 1),
+(4, 1, 'itziar', 'Itziar', 'Etxebeste Etxeberria', '1989-09-03', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:51:14', 1);
 
 --
 -- Índices para tablas volcadas
