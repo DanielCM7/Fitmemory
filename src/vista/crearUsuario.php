@@ -1,4 +1,13 @@
-<!doctype html>
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (isset($_SESSION['error'])){
+  $mensajes = $_SESSION['error'];
+  unset($_SESSION['error']);
+}
+?>
+
 <html lang="es" data-bs-theme="dark">
   <head>
     <meta charset="utf-8" />
@@ -123,6 +132,21 @@
           </button>
         </div>
       </form>
+      <?php
+      if (isset($mensajes)){
+        echo <<<HTML
+          <div class='mensaje-usuario mensaje-error'>
+        HTML;
+        foreach ($mensajes as $mensaje){
+          echo <<<HTML
+            <p>$mensaje</p>
+          HTML;
+          }
+          echo <<<HTML
+            </div>
+          HTML;
+      }
+      ?>
     </main>
     <script src="assets/js/crearUsuario.js"></script>
   </body>

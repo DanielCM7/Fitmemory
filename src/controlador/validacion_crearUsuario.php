@@ -70,16 +70,16 @@ if (isset($_POST['usuario']) && isset($_POST['nombre']) && isset($_POST['apellid
         $errores[] = "El usuario ya existe en la base de datos.";
     }
 
-    // Comprobamos si hay errores (el array errores no esté vacío)
+    // Comprobamos si hay errores (el array errores no esté vacío) para redirigir, y vamos a usar variables de sesión para poder lanzar mensajes al front
+    session_start();
+
     if (!empty($errores)) {
-        foreach ($errores as $error) {
-            echo "<p>$error</p>";
-        }
+        $_SESSION['error'] = $errores;
         header("Location: /Fitmemory/index.php?vista=crearUsuario");
         exit;
     } else {
         ControladorBD::crearUsuario($usuario, $contrasena, $nombre, $apellidos, $id_rol, $fechaNac);
-
+        $_SESSION['exito'] = 'Usuario creado correctamente.';
         header("Location: /Fitmemory/index.php?vista=loginInicio");
         exit;
     }

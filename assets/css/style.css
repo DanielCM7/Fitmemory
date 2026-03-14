@@ -203,6 +203,34 @@ select option {
   color: #ffffff;
 }
 
+.mensaje-usuario {
+  padding: 10px;
+  border-radius: 7px;
+  margin-top: 30px;
+  p {
+    margin-left: 20px;
+  }
+}
+
+@keyframes fadeOutMsgExito {
+  0% {opacity: 1;}
+  60% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+.mensaje-exito {
+  background-color: #bde9a962;
+  color: #22c55e;
+  animation: fadeOutMsgExito 2s ease-out;
+  animation-fill-mode: forwards;
+}
+
+.mensaje-error {
+  background-color: #8a3b3b75;
+  color:#e0002a
+}
+
+
 /* ==================================================
    CHECKBOX
    ================================================== */

@@ -1,4 +1,13 @@
-<!doctype html>
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (isset($_SESSION['exito'])){
+  $mensaje = $_SESSION['exito'];
+  unset($_SESSION['exito']);
+}
+?>
+
 <html lang="es" data-bs-theme="dark">
   <head>
     <meta charset="utf-8" />
@@ -74,6 +83,13 @@ CONTRASEÑA:</label>
           </button>
         </div>
       </form>
+      <?php
+      if (isset($mensaje)){
+        echo <<<HTML
+          <div class='mensaje-usuario mensaje-exito'>$mensaje</div>
+        HTML;
+      }
+      ?>
     </main>
 
     <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
