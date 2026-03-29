@@ -1,4 +1,6 @@
 <?php
+// FICHERO VISTA: Formulario para crear un nuevo usuario, con validación de campos y mensajes de error
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

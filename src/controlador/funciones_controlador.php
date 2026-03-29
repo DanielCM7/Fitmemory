@@ -55,7 +55,7 @@ function enrute() {
         // Haremos un array que relaciones vistas con roles
         $permisos = [
             'administrador' => ['adminDashboard'],
-            'cliente' => ['clienteDashboard'],
+            'cliente' => ['clienteDashboard', 'crearSesionEntreno', 'misSesiones', 'miProgreso'],
             'entrenador'  => ['entrenadorDashboard'],
             'invitado' => ['inicio', 'crearUsuario']
         ];
@@ -79,6 +79,18 @@ function enrute() {
             case 'clienteDashboard':
                 // Introducimos la vista del dashboard del alumno a través de la clase controlador
                 include_once "src/vista/clienteDashboard.php";
+                break;
+            case 'crearSesionEntreno':
+                // Introducimos la vista del formulario de creación de sesión de entrenamiento
+                include_once "src/vista/crearSesionEntreno.php";
+                break;
+            case 'misSesiones':
+                // Introducimos la vista del formulario de creación de sesión de entrenamiento
+                include_once "src/vista/misSesiones.php";
+                break;
+            case 'miProgreso':
+                // Introducimos la vista del formulario de creación de sesión de entrenamiento
+                include_once "src/vista/miProgreso.php";
                 break;
             // VISTAS ENTRENADOR ___________________________________________________________________
             case 'entrenadorDashboard':

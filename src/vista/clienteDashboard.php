@@ -1,3 +1,14 @@
+
+
+
+<?php
+// Comprobamos que el usuario ha iniciado sesión, si no lo ha hecho redirigimos al formulario de login
+if (!isset($_SESSION['usuario'])) {
+  header ("Location: ../../index.php?vista=inicio");
+  exit();
+}
+?>
+
 <!doctype html>
 <html lang="es" data-bs-theme="dark">
   <head>
@@ -54,14 +65,15 @@
           <button
             class="btn btn-primary btn-lg d-flex align-items-center justify-content-center gap-2 dashboard-boton"
             type="button"
+            onclick="window.location.href='index.php?vista=crearSesionEntreno'"
           >
             <i class="bi bi-person-add"></i>
             Nueva Sesión
           </button>
-
           <button
             class="btn btn-primary btn-lg d-flex align-items-center justify-content-center gap-2 dashboard-boton"
             type="button"
+            onclick="window.location.href='index.php?vista=misSesiones'"
           >
             <i class="bi bi-clipboard-data"></i>
             Mis Sesiones
@@ -72,6 +84,7 @@
           <button
             class="btn btn-primary btn-lg d-flex align-items-center justify-content-center gap-2 dashboard-boton"
             type="button"
+            onclick="window.location.href='index.php?vista=miProgreso'"
           >
             <i class="bi bi-graph-up"></i>
             Mi Progreso

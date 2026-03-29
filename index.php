@@ -1,6 +1,10 @@
 <?php
 //NOTA DE PAULA: Tomo de referencia la estructura que aprendí para EduFlow, me parece que deja un index bastante limpio sin que la primera página sea una vista y centraliza todo a través del index.
 
+// Definimos una constante BASE_URL para usarla en las redirecciones y enlaces, así evitamos problemas con rutas relativas
+if(!defined('BASE_URL')) {
+    define('BASE_URL', '/Fitmemory/');
+}
 // Requerimos las funciones
 include_once 'src/controlador/funciones_controlador.php';
 
@@ -9,23 +13,25 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+
+
 // Comprobamos si el parámetro público 'vista' NO está definido
 if (!isset($_GET['vista'])) {
     // Si NO está definido, comprobamos si el parámetro público de sesión 'usuario' está definido
     if (isset($_SESSION['perfil'])) {
         // Si 'perfil' está definido, comprobamos el tipo de usuario y lo enviamos a su correspondiente dashboard
         if ($_SESSION['perfil']=="admin") {
-            header('Location: ./index.php?vista=adminDashboard');
+            header('Location: ' . BASE_URL . 'index.php?vista=adminDashboard');
         }
         if ($_SESSION['perfil']=="cliente") {
-            header('Location: ./index.php?vista=clienteDashboard');
+            header('Location: ' . BASE_URL . 'index.php?vista=clienteDashboard');
         }
         if ($_SESSION['perfil']=="entrenador") {
-            header('Location: ./index.php?vista=entrenadorDashboard');
+            header('Location: ' . BASE_URL . 'index.php?vista=entrenadorDashboard');
         }
     } else {
         // Si 'perfil' NO está definido, agrega el valor inicio a vista para redirigir al formulario de inicio si no se está logueado
-        header('Location: ./index.php?vista=inicio');
+        header('Location: ' . BASE_URL . 'index.php?vista=inicio');
     }
 } else {
     // Si el parámetro 'vista' NO está definido pero el usuario sí
