@@ -23,12 +23,17 @@ require_once 'funciones_controlador.php';
             // Creamos una variable de sesión llamada tiempo donde guardamos la hora de inicio de sesión (en segundos)
             $_SESSION['tiempo'] = time();
             header ("Location: ../../index.php");
+            exit();
         } else {
             // Si el usuario y/o contraseña no existen en la base de datos continuamos en el formulario de login
+            // Creamos una variable de sesión llamada error donde guardamos el mensaje de error que se mostrará en el formulario de login
+            $_SESSION['error'] = "Usuario o contraseña incorrectos";
             header ("Location: ../../index.php?vista=inicio");
+            exit();
         }
     } else {
         // Si no se ha enviado el formulario, mostramos el formulario
         header ("Location: ../../index.php?vista=inicio");
+        exit();
     }
     ?>

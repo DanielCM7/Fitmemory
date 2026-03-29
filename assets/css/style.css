@@ -160,14 +160,14 @@ body {
 
 /* Focus para inputs válidos */
 .formulario-campo.exito:focus {
-    border-color: #09c372 !important;
-    box-shadow: 0 0 0 4px rgba(9, 195, 114, 0.25) !important;
+  border-color: #09c372 !important;
+  box-shadow: 0 0 0 4px rgba(9, 195, 114, 0.25) !important;
 }
 
 /* Focus para inputs con error */
 .formulario-campo.error:focus {
-    border-color: #ff3860 !important;
-    box-shadow: 0 0 0 4px rgba(214, 42, 42, 0.25) !important;
+  border-color: #ff3860 !important;
+  box-shadow: 0 0 0 4px rgba(214, 42, 42, 0.25) !important;
 }
 
 .formulario-acciones {
@@ -213,9 +213,15 @@ select option {
 }
 
 @keyframes fadeOutMsgExito {
-  0% {opacity: 1;}
-  60% {opacity: 1;}
-  100% {opacity: 0;}
+  0% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .mensaje-exito {
@@ -227,9 +233,21 @@ select option {
 
 .mensaje-error {
   background-color: #8a3b3b75;
-  color:#e0002a
+  color: #e0002a;
+  animation: fadeOutMsgExito 3s ease-out;
+  animation-fill-mode: forwards;
 }
 
+.panel-mensaje.exito-error {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+}
+
+.texto-mensaje {
+  font-size: 1rem;
+  font-weight: 600;
+}
 
 /* ==================================================
    CHECKBOX
@@ -443,9 +461,9 @@ select option {
   font-size: 1.1rem;
 }
 .bienvenida {
-text-align: center;
-font-size: 2rem;
-font-weight: bold;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 /* ==================================================
@@ -469,28 +487,32 @@ font-weight: bold;
 }
 
 /* Añado estos elementos para avisos de validación */
-.exito input, .exito select {
-    border-color: #09c372;
+.exito input,
+.exito select {
+  border-color: #09c372;
 }
 
-.error input, .error select {
-    border-color: #ff3860;
+.error input,
+.error select {
+  border-color: #ff3860;
 }
 
-.exito input:focus, .exito select:focus {
+.exito input:focus,
+.exito select:focus {
   border-color: #09c372;
   box-shadow: 0 0 0 4px rgba(24, 195, 9, 0.2);
 }
 
-.error input:focus, .error select:focus {
+.error input:focus,
+.error select:focus {
   border-color: #ff3860;
   box-shadow: 0 0 0 4px rgba(214, 42, 42, 0.2);
 }
 
-.col-sm-8 >.error {
-    color: #ff3860;
-    font-size: 11px;
-    height: 13px;
+.col-sm-8 > .error {
+  color: #ff3860;
+  font-size: 11px;
+  height: 13px;
 }
 
 /* ==================================================
@@ -609,27 +631,27 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 select:-webkit-autofill,
 textarea:-webkit-autofill {
-    -webkit-text-fill-color: #ffffff;
-    -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0.06) inset;
-    transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #ffffff;
+  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.06) inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 /* Focus general */
 .formulario-campo:focus {
-    outline: none;
-    border-color: rgba(37, 99, 235, 0.95);
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.18);
+  outline: none;
+  border-color: rgba(37, 99, 235, 0.95);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.18);
 }
 
 /* Focus input válido */
 .formulario-campo.exito:focus {
-    border-color: #09c372 !important;
-    box-shadow: 0 0 0 4px rgba(9, 195, 114, 0.25) !important;
+  border-color: #09c372 !important;
+  box-shadow: 0 0 0 4px rgba(9, 195, 114, 0.25) !important;
 }
 
 /* Focus input con error */
 .formulario-campo.error:focus {
-    border-color: #ff3860 !important;
-    box-shadow: 0 0 0 4px rgba(214, 42, 42, 0.25) !important;
+  border-color: #ff3860 !important;
+  box-shadow: 0 0 0 4px rgba(214, 42, 42, 0.25) !important;
 }

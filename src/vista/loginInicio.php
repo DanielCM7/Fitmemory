@@ -2,9 +2,15 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+// Si existe un mensaje de éxito en la sesión, lo guardamos en una variable y luego lo eliminamos de la sesión para que no se muestre nuevamente
 if (isset($_SESSION['exito'])){
   $mensaje = $_SESSION['exito'];
   unset($_SESSION['exito']);
+}
+// Si existe un mensaje de error en la sesión, lo guardamos en una variable y luego lo eliminamos de la sesión para que no se muestre nuevamente
+if (isset($_SESSION['error'])){
+  $mensajeError = $_SESSION['error'];
+  unset($_SESSION['error']);
 }
 ?>
 
@@ -27,6 +33,24 @@ if (isset($_SESSION['exito'])){
       <?php include "src/vista/incl/header.php"; ?>
 
 
+      <section class="panel-mensaje exito-error">
+        <div class="texto-mensaje">
+        <?php
+          if (isset($mensaje)){
+            echo <<<HTML
+              <div class='mensaje-usuario mensaje-exito'>$mensaje</div>
+            HTML;
+          }
+          if (isset($mensajeError)){
+            echo <<<HTML
+              <div class='mensaje-usuario mensaje-error'>$mensajeError</div>
+            HTML;
+          }
+        ?>
+        </div>
+      </section>
+
+
       <!-- Paula: añado en la etiqueta form que se dirija al controlador que revisa con la BBDD las credenciales y también el método de envío del formulario (POST, por seguridad) -->
            <form class="panel-formulario login-formulario" action="src/controlador/control_inicio.php" method="POST">
         <div class="row mb-3 align-items-center formulario-fila">
@@ -39,6 +63,8 @@ if (isset($_SESSION['exito'])){
               id="usuario"
               name="usuario"
               placeholder="Usuario"
+              focused
+              required
             />
           </div>
         </div>
@@ -52,6 +78,7 @@ CONTRASEÑA:</label>
               id="contrasena"
               name="contrasena"
               placeholder="Contraseña"
+              required
             />
           </div>
         </div>
@@ -83,13 +110,6 @@ CONTRASEÑA:</label>
           </button>
         </div>
       </form>
-      <?php
-      if (isset($mensaje)){
-        echo <<<HTML
-          <div class='mensaje-usuario mensaje-exito'>$mensaje</div>
-        HTML;
-      }
-      ?>
     </main>
 
     <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
