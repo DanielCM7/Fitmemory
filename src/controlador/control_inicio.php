@@ -1,6 +1,6 @@
 <?php
 
-require_once 'funciones_controlador.php';
+require_once 'controlador_BD.php';
 
 // FICHERO CONTROLADOR: Procesa la información del formulario de inicio (login) y redirige según los datos recibidos
 

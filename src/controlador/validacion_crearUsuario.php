@@ -2,7 +2,7 @@
 // Vamos a volver a validar el formulario en php
 
 // Llamamos a las funciones controlador
-require_once "funciones_controlador.php";
+require_once "controlador_BD.php";
 
 // REGEX EN PHP PARA VALIDACIONES ____________________________________
 // Usuario: 3-20 caracteres, alfanuméricos, guiones y guion bajo
