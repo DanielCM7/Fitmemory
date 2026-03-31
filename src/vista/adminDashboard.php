@@ -33,16 +33,7 @@ if (!isset($_SESSION['usuario'])) {
     <main class="app-main form-signin w-100 m-auto">
       <?php include "incl/header.php"; ?>
 
-      <div class="topbar-izquierda">
-        <a
-          href="mailto:tu-correo@ejemplo.com"
-          class="text-decoration-none d-flex align-items-center gap-2 topbar-enlace"
-        >
-          <i class="bi bi-envelope-at-fill fs-4"></i>
-          <span class="d-none d-md-inline">Contactar</span>
-        </a>
-      </div>
-
+      
       <div class="topbar-derecha">
         <button
           class="btn btn-outline-light btn-sm d-flex align-items-center gap-1 btn-top-header topbar-boton"
@@ -52,31 +43,20 @@ if (!isset($_SESSION['usuario'])) {
           <span class="d-none d-sm-inline">Cerrar Sesión</span>
         </button>
 
-        <button
-          class="btn btn-outline-light btn-sm d-flex align-items-center gap-1 btn-top-header topbar-boton"
-        >
-          <i class="bi bi-person-gear"></i>
-          <span class="d-none d-sm-inline">Editar Perfil</span>
-        </button>
+    
       </div>
-        <p class="bienvenida"> Hola <?php echo $_SESSION['nombre']?>, ¡Bienvenido a Fitmemory!</p>
+        <p class="bienvenida"> Bienvenido al panel de administración</p>
+
       <div class="container text-center mt-5 panel-dashboard">
-        <div class="dashboard-acciones dashboard-acciones-dobles mb-3">
+
+        <div class="dashboard-acciones dashboard-acciones-simple">
           <button
             class="btn btn-primary btn-lg d-flex align-items-center justify-content-center gap-2 dashboard-boton"
             type="button"
-            onclick="window.location.href='index.php?vista=crearSesionEntreno'"
+            onclick="window.location.href='index.php?vista=gestionUsuarios'"
           >
-            <i class="bi bi-person-add"></i>
-            Nueva Sesión
-          </button>
-          <button
-            class="btn btn-primary btn-lg d-flex align-items-center justify-content-center gap-2 dashboard-boton"
-            type="button"
-            onclick="window.location.href='index.php?vista=misSesiones'"
-          >
-            <i class="bi bi-clipboard-data"></i>
-            Mis Sesiones
+            <i class="bi bi-person-gear"></i>
+            Gestión de Usuarios
           </button>
         </div>
 
@@ -84,10 +64,21 @@ if (!isset($_SESSION['usuario'])) {
           <button
             class="btn btn-primary btn-lg d-flex align-items-center justify-content-center gap-2 dashboard-boton"
             type="button"
-            onclick="window.location.href='index.php?vista=miProgreso'"
+            onclick="window.location.href='index.php?vista=gestionEntrenadores'"
           >
-            <i class="bi bi-graph-up"></i>
-            Mi Progreso
+            <i class="bi bi-people"></i>
+            Asignar Entrenadores
+          </button>
+        </div>
+
+        <div class="dashboard-acciones dashboard-acciones-simple">
+          <button
+            class="btn btn-primary btn-lg d-flex align-items-center justify-content-center gap-2 dashboard-boton"
+            type="button"
+            onclick="window.location.href='index.php?vista=gestionEjercicios'"
+          >
+            <i class="bi bi-card-list"></i>
+            Gestionar Ejercicios
           </button>
         </div>
       </div>

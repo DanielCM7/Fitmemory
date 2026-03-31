@@ -442,9 +442,10 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id_usuario`, `id_rol`, `nombre_usuario`, `nombre`, `apellidos`, `fecha_nacimiento`, `contrasena_hash`, `fecha_registro`, `activo`) VALUES
 (1, 1, 'dokiluz', 'David', 'Hernandez Rodriguez', '1991-08-16', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:54:38', 1),
-(2, 2, 'staluap','Paula', 'Serrano Torrecillas', '1996-06-26', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:54:24', 1),
+(2, 1, 'staluap','Paula', 'Serrano Torrecillas', '1996-06-26', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:54:24', 1),
 (3, 1, 'danielCM','Daniel', 'Cortés Martín', '2001-01-15', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:51:14', 1),
-(4, 1, 'itziar', 'Itziar', 'Etxebeste Etxeberria', '1989-09-03', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:51:14', 1);
+(4, 1, 'itziar', 'Itziar', 'Etxebeste Etxeberria', '1989-09-03', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:51:14', 1),
+(5, 3, 'admin', 'Administrador', 'Persona Administradora', '1984-02-29', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:51:14', 1);
 
 --
 -- Índices para tablas volcadas

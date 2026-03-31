@@ -7,6 +7,8 @@ if(!defined('BASE_URL')) {
 }
 // Requerimos las funciones
 include_once 'src/controlador/funciones_controlador.php';
+include_once 'src/controlador/cierre_funciones.php';
+include_once 'src/controlador/controlador_enrute.php';
 
 // Usamos la función inicializa la sesión, usamos un if que evite un NOTICE en XAMPP
 if (session_status() == PHP_SESSION_NONE) {
@@ -20,7 +22,7 @@ if (!isset($_GET['vista'])) {
     // Si NO está definido, comprobamos si el parámetro público de sesión 'usuario' está definido
     if (isset($_SESSION['perfil'])) {
         // Si 'perfil' está definido, comprobamos el tipo de usuario y lo enviamos a su correspondiente dashboard
-        if ($_SESSION['perfil']=="admin") {
+        if ($_SESSION['perfil']=="administrador") {
             header('Location: ' . BASE_URL . 'index.php?vista=adminDashboard');
         }
         if ($_SESSION['perfil']=="cliente") {

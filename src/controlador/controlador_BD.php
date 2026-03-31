@@ -3,125 +3,7 @@
 // Introducimos el modelo para poder usar la clase que maneja la base de datos SQL
 require_once (__DIR__.'/../modelo/modelo.php');
 
-// Vamos a crear una función que encapsule el cierre analógico
-function cierreAnalogico()
-{
-    // Función de iniciar sesión
-    session_start();
-    // Eliminamos datos de la sesión en el lado cliente
-    session_unset();
-    // Eliminamos datos de la sesión en el lado servidor
-    session_destroy();
-    // Redirigir al usuario al index
-    header("Location: ../../index.php?vista=inicio");
-    exit();
-}
-
-// Vamos a crear un cierre programado a los 30 minutos
-// TODO: Revisar como hacía para que no se cerrase si hay actividad. Ahora mismo se cierra incluso si hay actividad.
-function cierreProgramado()
-{
-    // Usamos la función inicializa la sesión, usamos un if que evite un NOTICE en XAMPP
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    //Control de tiempo a la sesion
-    // Establece el tiempo máximo de vida de la sesión (30 minutos en segundos)
-    $tiempo_maximo = 30 * 60; // 30 minutos
-
-    // Comprobamos si hay sesión con tiempo establecido y si ha superado el máximo
-    if (isset($_SESSION['tiempo'])) {
-        if ((time() - $_SESSION['tiempo']) > $tiempo_maximo) {
-            session_unset();
-            session_destroy();
-            header("Location: index.php?vista=inicio");
-            exit();
-        }
-    }
-}
-
-// IMPORTANTE
-// Función con un switch que enruta a una vista u otra
-function enrute() {
-    // En una variable 'rol' comprobarmos el perfil de usuario guardado en la variable de sesión 'perfil'. Si no hay ninguno el rol es 'invitado'. Usaremos esto para restringir el paso a rutas manualmente desde la barra de navegador y aportar seguridad.
-    $rol = $_SESSION['perfil'] ?? 'invitado';
-    // Si la variable pública 'vista' ya tiene un valor asociado, usaremos un condicional de tipo switch
-    // De esta forma todas las páginas se visualizarán desde el index
-    if (isset($_GET['vista'])) {
-
-        // Guardamos el valor de vista
-        $vista = $_GET['vista'];
-
-        // Haremos un array que relaciones vistas con roles
-        $permisos = [
-            'administrador' => ['adminDashboard'],
-            'cliente' => ['clienteDashboard', 'crearSesionEntreno', 'misSesiones', 'miProgreso'],
-            'entrenador'  => ['entrenadorDashboard'],
-            'invitado' => ['inicio', 'crearUsuario']
-        ];
-
-        // Si el rol no tiene permiso, forzamos al inicio o dashboard correspondiente
-        if (!in_array($vista, $permisos[$rol] ?? [])) {
-            if ($rol === 'administrador') $vista = 'adminDashboard';
-            elseif ($rol === 'cliente') $vista = 'clienteDashboard';
-            elseif ($rol === 'entrenador') $vista = 'entrenadorDashboard';
-            else $vista = 'inicio';
-        }
-
-        switch ($vista) {
-            // VISTAS ADMINISTRADOR _________________________________________________________________
-            // Si el valor de 'vista' es 'adminDashboard'
-            case 'adminDashboard':
-                // Introducimos la vista del dashboard del administrador
-                include_once "src/vista/adminDashboard.php";
-                break;
-            // VISTAS CLIENTE ______________________________________________________________________
-            case 'clienteDashboard':
-                // Introducimos la vista del dashboard del alumno a través de la clase controlador
-                include_once "src/vista/clienteDashboard.php";
-                break;
-            case 'crearSesionEntreno':
-                // Introducimos la vista del formulario de creación de sesión de entrenamiento
-                include_once "src/vista/crearSesionEntreno.php";
-                break;
-            case 'misSesiones':
-                // Introducimos la vista del formulario de creación de sesión de entrenamiento
-                include_once "src/vista/misSesiones.php";
-                break;
-            case 'miProgreso':
-                // Introducimos la vista del formulario de creación de sesión de entrenamiento
-                include_once "src/vista/miProgreso.php";
-                break;
-            // VISTAS ENTRENADOR ___________________________________________________________________
-            case 'entrenadorDashboard':
-                // Introducimos la vista del dashboard del profesor
-                include_once "src/vista/entrenadorDashboard.php";
-                break;
-            // VISTAS GENERALES ___________________________________________________________________
-            // Si el valor de 'vista' es 'inicio'
-            case 'inicio':
-                // Redirigimos al formulario de inicio
-                include_once "src/vista/loginInicio.php";
-                break;
-            // Como valor por defecto
-            case 'crearUsuario':
-                // Redirigimos al formulario de inicio
-                include_once "src/vista/crearUsuario.php";
-                break;
-            // Como valor por defecto
-            default:
-                // Redirigimos al formulario de inicio
-                //TODO: Crear página 404 para que sea default si hay algún error
-                include_once "src/vista/loginInicio.php";
-                break;
-        }
-    }
-}
-
-
-// Clase estática para realizar CRUD de la base de datos en la tabla de usuarios
-// TODO Ahora mismo la tabla carece de nombre de usuario o email que sea ÚNICO que diferencia a usuarios con el mismo nombre, otra opción es que el usuario entre con su id.
-
+// CLASE PARA HACR CRUD EN LA BASE DE DATOS
 class ControladorBD {
 
 // COMPROBAR QUE EXISTE __________________________________________________
@@ -160,11 +42,11 @@ class ControladorBD {
         return $resultado ? $resultado[0] : null;
     }
 
-// MÉTODOS GET __________________________________________________
+// MÉTODOS GET (OBTENER DATOS A PARTIR DE UNO CONOCIDO) ____________________________________________
 
     // TABLA ROLES _____________________________________________
 
-    // Conseguir el id de un rol por el nombre del rol (cliente => 1)
+    // Conseguir el id de un rol por el nombre del rol (cliente devuelve 1)
     public static function getRolIdPorNombreRol ($nombre_rol) {
         $rol = ControladorBD::existeRolNombre($nombre_rol);
         if (is_null($rol)){
@@ -173,8 +55,7 @@ class ControladorBD {
             return $rol['id_rol'];
         }
     }
-
-    // Averiguar rol usuario a través de un id_rol (1 => cliente)
+    // Averiguar rol usuario a través de un id_rol (1 devuelve cliente)
     public static function getRolUsuarioPorId($id_rol) {
         $rol = ControladorBD::existeRolId($id_rol);
         if (is_null($rol)){
@@ -183,7 +64,6 @@ class ControladorBD {
             return $rol['nombre_rol'];
         }
     }
-
     // Averiguar rol de un usuario a través de su nombre (usuario => 1 => cliente)
     public static function getRolUsuarioPorUsuario($nombre_usuario) {
         $usuario = ControladorBD::existeUsuario($nombre_usuario);
@@ -209,7 +89,6 @@ class ControladorBD {
         // Si existe el usuario devolvemos el valor del campo nombre
         return $usuario ? $usuario['apellidos'] : null;
     }
-
     // IMPORTANTE: Método para comprobar las credenciales de un login
     public static function loginUsuario($nombre_usuario, $contrasena_hash) {
         // Comprobamos que exista un usuario y que su contraseña sea exactamente la introducida
@@ -234,7 +113,7 @@ class ControladorBD {
         return BaseDatos::consultaInsercion($consulta, $nombre_usuario, hash('sha256', $contrasena_hash), $nombre, $apellidos, $id_rol, $fecha_nacimiento);
     }
 
-//MÉTODOS DE MODIFICACIÓN ______________________________________________
+//MÉTODOS DE MODIFICACIÓN/ACTUALIZACIÓN ______________________________________________
 
     // CAMBIAR TU CONTRASEÑA COMO USUARIO
     // Metodo de actualización de datos (también de escritura en la BD)
@@ -260,7 +139,6 @@ class ControladorBD {
         $consulta = "DELETE FROM usuarios WHERE id_usuario = ?";
         return BaseDatos::consultaInsercion($consulta, $id_usuario);
     }
-
     // Método para listar TODOS los usuarios
     public static function listarUsuarios() {
         // Consultamos todos los registros de la tabla usuarios
