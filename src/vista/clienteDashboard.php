@@ -30,35 +30,11 @@ if (!isset($_SESSION['usuario'])) {
   </head>
 
   <body class="app-body d-flex align-items-center py-4 bg-body-tertiary">
-    <main class="app-main form-signin w-100 m-auto">
+    <main class="app-main app-main-sesion form-signin w-100 m-auto">
       <?php include "incl/header.php"; ?>
 
-      <div class="topbar-izquierda">
-        <a
-          href="mailto:tu-correo@ejemplo.com"
-          class="text-decoration-none d-flex align-items-center gap-2 topbar-enlace"
-        >
-          <i class="bi bi-envelope-at-fill fs-4"></i>
-          <span class="d-none d-md-inline">Contactar</span>
-        </a>
-      </div>
 
-      <div class="topbar-derecha">
-        <button
-          class="btn btn-outline-light btn-sm d-flex align-items-center gap-1 btn-top-header topbar-boton"
-          onclick="window.location.href='src/controlador/cierre_sesion.php'"
-        >
-          <i class="bi bi-arrow-bar-right"></i>
-          <span class="d-none d-sm-inline">Cerrar Sesión</span>
-        </button>
 
-        <button
-          class="btn btn-outline-light btn-sm d-flex align-items-center gap-1 btn-top-header topbar-boton"
-        >
-          <i class="bi bi-person-gear"></i>
-          <span class="d-none d-sm-inline">Editar Perfil</span>
-        </button>
-      </div>
         <p class="bienvenida"> Hola <?php echo $_SESSION['nombre']?>, ¡Bienvenido a Fitmemory!</p>
       <div class="container text-center mt-5 panel-dashboard">
         <div class="dashboard-acciones dashboard-acciones-dobles mb-3">

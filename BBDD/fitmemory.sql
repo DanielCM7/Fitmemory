@@ -394,7 +394,7 @@ CREATE TABLE `sesiones` (
   `id_sesion` int(10) NOT NULL,
   `id_usuario` int(10) NOT NULL,
   `fecha` datetime NOT NULL,
-  `comentario` int(11) NOT NULL
+  `comentario` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

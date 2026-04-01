@@ -33,15 +33,6 @@ if (!isset($_SESSION['usuario'])) {
     <main class="app-main form-signin w-100 m-auto">
       <?php include "incl/header.php"; ?>
 
-      
-      <div class="topbar-derecha">
-        <button
-          class="btn btn-outline-light btn-sm d-flex align-items-center gap-1 btn-top-header topbar-boton"
-          onclick="window.location.href='src/controlador/cierre_sesion.php'"
-        >
-          <i class="bi bi-arrow-bar-right"></i>
-          <span class="d-none d-sm-inline">Cerrar Sesión</span>
-        </button>
 
     
       </div>
