@@ -30,7 +30,8 @@ if (isset($_SESSION['error'])){
   </head>
 <body class="app-body d-flex align-items-center py-4 bg-body-tertiary">
     <main class="app-main form-signin w-100 m-auto">
-      <?php include "src/vista/incl/header.php"; ?>
+            <?php include "incl/header.php"; ?>
+
 
 
       <section class="panel-mensaje exito-error">

@@ -30,8 +30,9 @@ if (!isset($_SESSION['usuario'])) {
   </head>
 
   <body class="app-body d-flex align-items-center py-4 bg-body-tertiary">
-    <main class="app-main app-main-sesion form-signin w-100 m-auto">
+    <main class="app-main form-signin w-100 m-auto">
       <?php include "incl/header.php"; ?>
+      
 
 
 
