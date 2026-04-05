@@ -28,7 +28,7 @@ $ejerciciosPorGrupo = ControladorBD::listarEjerciciosPorGrupo();
 </head>
 <body class="app-body d-flex align-items-center py-4 bg-body-tertiary">
   <main class="app-main app-main-sesion w-100 m-auto">
-    <?php include "incl/header.php"; ?>
+    <?php cabeceraWeb(); ?>
 
     <form action="<?php echo rtrim(BASE_URL, '/'); ?>/src/controlador/procesar_sesion_entreno.php" method="POST" class="panel-formulario panel-sesion-builder">
       <?php if ($mensajeExito): ?>

@@ -27,7 +27,7 @@ if (isset($_SESSION['error'])){
 
   <body class="app-body d-flex align-items-center py-4 bg-body-tertiary">
     <main class="app-main form-signin w-100 m-auto">
-      <?php include "incl/header.php"; ?>
+      <?php cabeceraWeb(); ?>
 
       <form id="formCrearUsuario" class="panel-formulario formulario-usuario" method="POST" action="src/controlador/validacion_crearUsuario.php">
 

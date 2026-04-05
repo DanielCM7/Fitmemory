@@ -50,7 +50,7 @@ $tituloSesion = 'Sesion ' . $dias[(int)date('w', $timestampSesion)] . ' ' . date
 </head>
 <body class="app-body d-flex align-items-center py-4 bg-body-tertiary">
   <main class="app-main app-main-sesion w-100 m-auto">
-    <?php include "incl/header.php"; ?>
+    <?php cabeceraWeb(); ?>
 
     <section class="panel-formulario panel-sesion-resumen">
       <div class="sesion-resumen-titulo">
