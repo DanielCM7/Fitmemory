@@ -3,14 +3,14 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 // Si existe un mensaje de éxito en la sesión, lo guardamos en una variable y luego lo eliminamos de la sesión para que no se muestre nuevamente
-if (isset($_SESSION['exito'])){
-  $mensaje = $_SESSION['exito'];
-  unset($_SESSION['exito']);
+if (isset($_SESSION['exito'])) {
+    $mensaje = $_SESSION['exito'];
+    unset($_SESSION['exito']);
 }
 // Si existe un mensaje de error en la sesión, lo guardamos en una variable y luego lo eliminamos de la sesión para que no se muestre nuevamente
-if (isset($_SESSION['error'])){
-  $mensajeError = $_SESSION['error'];
-  unset($_SESSION['error']);
+if (isset($_SESSION['error'])) {
+    $mensajeError = $_SESSION['error'];
+    unset($_SESSION['error']);
 }
 ?>
 
@@ -25,8 +25,14 @@ if (isset($_SESSION['error'])){
     />
     <meta name="generator" content="Astro v5.13.2" />
     <title>Fitmemory</title>
-    <link rel="canonical" href="index.php" />
-    <link rel="stylesheet" href="assets/css/style.css" />
+   <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+  crossorigin="anonymous"
+/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
   </head>
 <body class="app-body d-flex align-items-center py-4 bg-body-tertiary">
     <main class="app-main form-signin w-100 m-auto">
@@ -37,17 +43,17 @@ if (isset($_SESSION['error'])){
       <section class="panel-mensaje exito-error">
         <div class="texto-mensaje">
         <?php
-          if (isset($mensaje)){
-            echo <<<HTML
+          if (isset($mensaje)) {
+              echo <<<HTML
               <div class='mensaje-usuario mensaje-exito'>$mensaje</div>
             HTML;
           }
-          if (isset($mensajeError)){
-            echo <<<HTML
+if (isset($mensajeError)) {
+    echo <<<HTML
               <div class='mensaje-usuario mensaje-error'>$mensajeError</div>
             HTML;
-          }
-        ?>
+}
+?>
         </div>
       </section>
 
@@ -113,6 +119,5 @@ CONTRASEÑA:</label>
       </form>
     </main>
 
-    <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

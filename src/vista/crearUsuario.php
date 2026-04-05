@@ -4,9 +4,9 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-if (isset($_SESSION['error'])){
-  $mensajes = $_SESSION['error'];
-  unset($_SESSION['error']);
+if (isset($_SESSION['error'])) {
+    $mensajes = $_SESSION['error'];
+    unset($_SESSION['error']);
 }
 ?>
 
@@ -21,8 +21,14 @@ if (isset($_SESSION['error'])){
     />
     <meta name="generator" content="Astro v5.13.2" />
     <title>Fitmemory</title>
-    <link rel="canonical" href="index.php" />
-    <link rel="stylesheet" href="assets/css/style.css" />
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+  crossorigin="anonymous"
+/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
   </head>
 
   <body class="app-body d-flex align-items-center py-4 bg-body-tertiary">
@@ -135,12 +141,12 @@ if (isset($_SESSION['error'])){
         </div>
       </form>
       <?php
-      if (isset($mensajes)){
-        echo <<<HTML
+      if (isset($mensajes)) {
+          echo <<<HTML
           <div class='mensaje-usuario mensaje-error'>
         HTML;
-        foreach ($mensajes as $mensaje){
-          echo <<<HTML
+          foreach ($mensajes as $mensaje) {
+              echo <<<HTML
             <p>$mensaje</p>
           HTML;
           }
@@ -148,7 +154,7 @@ if (isset($_SESSION['error'])){
             </div>
           HTML;
       }
-      ?>
+?>
     </main>
     <script src="assets/js/crearUsuario.js"></script>
   </body>

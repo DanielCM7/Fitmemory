@@ -1,4 +1,5 @@
 <?php
+
 // FUNCIONES QUE CONTROLAN CABECERAS DINÁMICAS O ELEMENTOS REPETITIVOS DEL HTML
 
 // Función que genera la cabecera de inicio (header) según si se está o no logueado
@@ -47,11 +48,6 @@ function cabeceraWeb()
             {$mail}
         </div>
         <div class="topbar-centro">
-          <a
-            href="{$baseUrl}index.php?vista=clienteDashboard"
-            class="topbar-logo-link"
-            aria-label="Ir al inicio"
-          >
             <img
               class="topbar-logo"
               src="{$baseUrl}assets/brand/CB0E31FB-D18E-4582-85D5-47B13AA82F4D.png"

@@ -11,11 +11,6 @@
         </div>
 
         <div class="topbar-centro">
-          <a
-            href="<?php echo BASE_URL; ?>index.php?vista=clienteDashboard"
-            class="topbar-logo-link"
-            aria-label="Ir al inicio"
-          >
             <img
               class="topbar-logo"
               src="<?php echo BASE_URL; ?>assets/brand/CB0E31FB-D18E-4582-85D5-47B13AA82F4D.png"
