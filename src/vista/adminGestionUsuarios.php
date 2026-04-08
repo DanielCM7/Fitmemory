@@ -42,19 +42,22 @@ $tablaUsuarios = GeneradorTablasAdmin::tablaUsuarios($usuarios);
 </head>
 
 <body class="app-body d-flex align-items-center py-4 bg-body-tertiary">
-    <main class="app-main form-signin w-100 m-auto">
+    <main class="app-main app-main-sesion w-100 m-auto" style="max-width: fit-content">
       <?php cabeceraWeb(); ?>
-            <div class="lista-users">
-                <?php echo $tablaUsuarios ?>
-            </div>
-            <div class="">
-                <button class="btn btn-outline-light btn-sm d-flex align-items-center gap-2 topbar-boton topbar-boton-ancho" type="button" onclick="window.location.href='./index.php?vista=adminCrearUsuario'">
-                    <span>Añadir usuario</span>
-                </button>
-                <button class="btn btn-outline-light btn-sm d-flex align-items-center gap-2 topbar-boton topbar-boton-ancho" type="button" onclick="window.location.href='./index.php?vista=adminDashboard'">
-                    <span>Volver al dashboard</span>
-                </button>
-            </div>
+        <section class="panel-formulario" style="width: fit-content">
+            <h2 class="m-0 mb-4">Gestión de Usuarios</h2>
+                <div class="border rounded p-3 mb-4 table-responsive">
+                    <?php echo $tablaUsuarios ?>
+                </div>
+                <div class="sesion-footer-actions">
+                    <button class="btn btn-primary btn-lg boton-principal" type="button" onclick="window.location.href='./index.php?vista=adminCrearUsuario'">
+                        Añadir usuario
+                    </button>
+                    <button class="btn btn-secondary btn-lg boton-secundario" type="button" onclick="window.location.href='./index.php?vista=adminDashboard'">
+                        Volver al dashboard
+                    </button>
+                </div>
+            </section>
         </main>
     </body>
 </html>

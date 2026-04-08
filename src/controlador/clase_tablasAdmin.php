@@ -9,7 +9,7 @@ class GeneradorTablasAdmin {
     $tablaUsuarios = "";
     // Títulos de columna
     $tablaUsuarios .= <<<HTML
-        <table>
+        <table class="table table-dark table-striped align-middle mb-0">
         <tr>
             <th>id_usuario</th>
             <th>nombre_usuario</th>
@@ -44,7 +44,7 @@ class GeneradorTablasAdmin {
                 <td>$nombre</td>
                 <td>$apellidos</td>
                 <td>$fecha_nacimiento</td>
-                <td>$contrasena_hash</td>
+                <td>••••••</td>
                 <td>$fecha_registro</td>
                 <!-- Aquí generamos por cada usuario/fila un botón para actualizar ese usuario-->
                 <td>
@@ -59,8 +59,8 @@ class GeneradorTablasAdmin {
                     <input type="hidden" name="contrasena_hash" value="$contrasena_hash">
                     <input type="hidden" name="fecha_registro" value="$fecha_registro">
                     <!-- Al hacer click en el botón se envían los datos del formulario, se va a una página de actualización-->
-                    <button type="submit" class="iconoBD" formaction="index.php?vista=adminActualizarUsuario">
-                        <p>&#128393;</p>
+                    <button type="submit" class="btn btn-outline-light btn-sm d-flex align-items-center gap-2 topbar-boton topbar-boton-ancho" formaction="index.php?vista=adminActualizarUsuario" style="min-width:fit-content">
+                        <i class="bi bi-pencil-square"></i>
                     </button>
                     </form>
                 </td>
@@ -71,8 +71,8 @@ class GeneradorTablasAdmin {
                     <input type="hidden" name="accion" value="eliminar">
                     <input type="hidden" name="id_usuario" value="$id_usuario">
                     <!-- Al hacer click en el botón se envían los datos del formulario, se recarga la página y se procesan -->
-                    <button type="submit" class="iconoBD" onclick="window.location.reload();">
-                        <p>&#128465;</p>
+                    <button type="submit" class="btn btn-outline-light btn-sm d-flex align-items-center gap-2 topbar-boton topbar-boton-ancho" onclick="window.location.reload();" style="min-width:fit-content">
+                        <i class="bi bi-trash"></i>
                     </button>
                     </form>
                 </td>
