@@ -13,7 +13,7 @@ function enrute() {
 
         // Haremos un array que relaciones vistas con roles
         $permisos = [
-            'administrador' => ['adminDashboard'],
+            'administrador' => ['adminDashboard', 'adminGestionUsuarios', 'adminAsignarEntrenadores', 'adminGestionarEjercicios'],
             'cliente' => ['clienteDashboard', 'crearSesionEntreno', 'misSesiones', 'miProgreso', 'sesionCreada'],
             'entrenador'  => ['entrenadorDashboard'],
             'invitado' => ['inicio', 'crearUsuario']
@@ -34,8 +34,14 @@ function enrute() {
                 // Introducimos la vista del dashboard del administrador
                 include_once "src/vista/adminDashboard.php";
                 break;
-            // Introducimos varias vistas que se generarán dentro de un solo gestor según el valor de la vista
-                include_once "src/vista/adminDashboard.php";
+             case 'adminGestionUsuarios':
+                include_once "src/vista/adminGestionUsuarios.php";
+                break;
+            case 'adminAsignarEntrenadores':
+                include_once "src/vista/adminAsignarEntrenadores.php";
+                break;
+            case 'adminGestionarEjercicios':
+                include_once "src/vista/adminGestionarEjercicios.php";
                 break;
             // VISTAS CLIENTE ______________________________________________________________________
             case 'clienteDashboard':

@@ -5,11 +5,12 @@
 if(!defined('BASE_URL')) {
     define('BASE_URL', '/Fitmemory/');
 }
-// Requerimos las funciones
+// Requerimos las funciones y clases
 include_once 'src/controlador/controlador_BD.php';
 include_once 'src/controlador/cierre_funciones.php';
 include_once 'src/controlador/controlador_enrutador.php';
 include_once 'src/controlador/funciones_vista.php';
+include_once 'src/controlador/clase_tablasAdmin.php';
 
 // Usamos la función inicializa la sesión, usamos un if que evite un NOTICE en XAMPP
 if (session_status() == PHP_SESSION_NONE) {

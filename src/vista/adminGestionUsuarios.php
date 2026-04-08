@@ -14,37 +14,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['accion'] === 'actualizar') 
     $apellidos = $_POST['apellidos'];
     $fecha_nacimiento = $_POST['fecha_nacimiento'];
     $contrasena_hash = $_POST['contrasena_hash'];
-    UsuarioControlador::actualizarUsuario($id_usuario, $contrasena_hash, $nombre_completo, $perfil);
+    $id_rol  = ControladorBD::getRolIdPorNombreRol($rol);
+    ControladorBD::actualizarUsuario($id_usuario, $contrasena_hash, $nombre, $apellidos, $id_rol, $fecha_nacimiento);
 }
 
 
 // Almacenamos en una variable el array de usuarios que existen el la base de datos a través de la función listar usuarios que hemos creado en las funciones controlador bajo la clase ControlUsuarios
-$usuarios = UsuarioControlador::listarUsuarios();
+$usuarios = ControladorBD::listarUsuarios();
 // Usamos la función vista que convierte un array de usuarios en una tabla
 // Almacenamos en una variable la table para facilitar la inserción en el HTML
-$tablaUsuarios = tablaUsuarios($usuarios);
+$tablaUsuarios = GeneradorTablasAdmin::tablaUsuarios($usuarios);
+?>
 
-// Hemos insertado el HTML en el PHP para facilitar la inserción de variables dentro del HTML
-echo <<<HTML
-        <main>
-            <p class="titulo-pagina">Gestión de Usuarios</p>
-            <div class="boton-dashboard">
-                <!-- Este enlace deberá llevarnos al listado de usuarios (controla un cambio de vista) -->
-                <!-- Para ello cambiamos el valor de la vista en el index 'admin_gestion_usuarios', para que en el switch del index nos redirija a admin_alta_usuario.php -->
-                <a href="./index.php?vista=admin_alta_usuario" class="opcion-dashboard">
-                Añadir usuario
-                </a>
-            </div>
-            <div class="boton-dashboard">
-                <a href="./index.php?vista=admin_dashboard" class="opcion-dashboard">
-                Volver al dashboard
-                </a>
-            </div>
+<html lang="es" data-bs-theme="dark">
+ <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fitmemory - Sesion Guardada</title>
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+  crossorigin="anonymous"
+/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
+</head>
+
+<body class="app-body d-flex align-items-center py-4 bg-body-tertiary">
+    <main class="app-main form-signin w-100 m-auto">
+      <?php cabeceraWeb(); ?>
             <div class="lista-users">
-                $tablaUsuarios
+                <?php echo $tablaUsuarios ?>
+            </div>
+            <div class="">
+                <button class="btn btn-outline-light btn-sm d-flex align-items-center gap-2 topbar-boton topbar-boton-ancho" type="button" onclick="window.location.href='./index.php?vista=adminCrearUsuario'">
+                    <span>Añadir usuario</span>
+                </button>
+                <button class="btn btn-outline-light btn-sm d-flex align-items-center gap-2 topbar-boton topbar-boton-ancho" type="button" onclick="window.location.href='./index.php?vista=adminDashboard'">
+                    <span>Volver al dashboard</span>
+                </button>
             </div>
         </main>
     </body>
 </html>
-HTML;
-?>

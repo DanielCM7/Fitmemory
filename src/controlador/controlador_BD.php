@@ -110,7 +110,7 @@ class ControladorBD {
     // METODOS PARA CRUD DE ADMINISTRADORES EN PANEL DE USUARIOS ____________
 
     public static function actualizarUsuario($id_usuario, $contrasena_hash, $nombre, $apellidos, $id_rol, $fecha_nacimiento) {
-        $consulta = "UPDATE usuarios SET contrasena_hash = ?, nombre_completo = ?, id_rol = ? WHERE id_usuario = ?";
+        $consulta = "UPDATE usuarios SET contrasena_hash = ?, nombre = ?, apellidos = ?, id_rol, fecha_nacimiento = ? WHERE id_usuario = ?";
         return BaseDatos::consultaInsercion($consulta, hash('sha256', $contrasena_hash), $nombre, $apellidos, $id_rol, $fecha_nacimiento, $id_usuario);
     }
 
