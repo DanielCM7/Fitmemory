@@ -977,6 +977,22 @@ select option {
 }
 
 /* ==================================================
+   MI PROGRESO
+   ================================================== */
+
+.progreso-intro {
+  color: var(--color-texto-suave);
+}
+
+.progreso-card {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.progreso-card-label {
+  color: var(--color-texto-suave);
+}
+
+/* ==================================================
    RESPONSIVE
    ================================================== */
 
