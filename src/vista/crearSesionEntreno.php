@@ -15,7 +15,6 @@ unset($_SESSION['exito'], $_SESSION['error']);
 
 $gruposMusculares = ControladorBD::listarGruposMusculares() ?? [];
 $ejerciciosPorGrupo = ControladorBD::listarEjerciciosPorGrupo();
-
 ?>
 
 <html lang="es" data-bs-theme="dark">
