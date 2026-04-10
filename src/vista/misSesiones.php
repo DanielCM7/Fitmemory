@@ -19,7 +19,8 @@ $sesionesAgrupadas = ControladorBD::obtenerSesionesAgrupadasPorUsuario($_SESSION
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fitmemory - Mis Sesiones</title>
+  <title>Sesiones</title>
+  <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>assets/brand/CB0E31FB-D18E-4582-85D5-47B13AA82F4D.png"> <link rel="apple-touch-icon" href="<?php echo BASE_URL; ?>assets/brand/CB0E31FB-D18E-4582-85D5-47B13AA82F4D.png">
   <link
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
   rel="stylesheet"

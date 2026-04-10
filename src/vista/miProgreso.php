@@ -94,11 +94,17 @@ $chartGrupos   = array_keys($resumenGrupos);
 $chartGruposVol = array_map(fn ($d) => round($d['volumen'], 2), array_values($resumenGrupos));
 ?>
 
+<!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fitmemory - Mi Progreso</title>
+  <title>Progreso</title>
+
+    <!-- Iconos de la aplicación -->
+    <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>assets/brand/CB0E31FB-D18E-4582-85D5-47B13AA82F4D.png"> <link rel="apple-touch-icon" href="<?php echo BASE_URL; ?>assets/brand/CB0E31FB-D18E-4582-85D5-47B13AA82F4D.png">
+
+
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
@@ -107,8 +113,11 @@ $chartGruposVol = array_map(fn ($d) => round($d['volumen'], 2), array_values($re
   />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="<?php echo BASE_URL; ?>assets/js/miProgreso.js" defer></script>
 </head>
+
+
 
 <body class="app-body d-flex align-items-center py-4 bg-body-tertiary">
   <main class="app-main app-main-sesion w-100 m-auto">
@@ -128,7 +137,7 @@ $chartGruposVol = array_map(fn ($d) => round($d['volumen'], 2), array_values($re
       <?php endif; ?>
 
       <h2 class="m-0 mb-2">Mi progreso</h2>
-      <p class="mb-4" style="color: var(--color-texto-suave);">
+      <p class="mb-4 progreso-intro"> 
         Aqui puedes consultar un resumen de tus sesiones, volumen acumulado y evolucion mensual.
       </p>
 
@@ -141,26 +150,26 @@ $chartGruposVol = array_map(fn ($d) => round($d['volumen'], 2), array_values($re
         <!-- Tarjetas de resumen -->
         <div class="row g-3 mb-4">
           <div class="col-12 col-md-6 col-xl-3">
-            <div class="border rounded p-3 h-100" style="background: rgba(255,255,255,0.03);">
-              <small class="d-block mb-1" style="color: var(--color-texto-suave);">Sesiones</small>
+            <div class="border rounded p-3 h-100 progreso-card">
+              <small class="d-block mb-1 progreso-card-label">Sesiones</small>
               <div class="fs-4 fw-bold"><?php echo $totalSesiones; ?></div>
             </div>
           </div>
           <div class="col-12 col-md-6 col-xl-3">
-            <div class="border rounded p-3 h-100" style="background: rgba(255,255,255,0.03);">
-              <small class="d-block mb-1" style="color: var(--color-texto-suave);">Registros de ejercicio</small>
+            <div class="border rounded p-3 h-100 progreso-card">
+              <small class="d-block mb-1 progreso-card-label">Registros de ejercicio</small>
               <div class="fs-4 fw-bold"><?php echo $totalEjercicios; ?></div>
             </div>
           </div>
           <div class="col-12 col-md-6 col-xl-3">
-            <div class="border rounded p-3 h-100" style="background: rgba(255,255,255,0.03);">
-              <small class="d-block mb-1" style="color: var(--color-texto-suave);">Series totales</small>
+            <div class="border rounded p-3 h-100 progreso-card">
+              <small class="d-block mb-1 progreso-card-label">Series totales</small>
               <div class="fs-4 fw-bold"><?php echo $totalSeries; ?></div>
             </div>
           </div>
           <div class="col-12 col-md-6 col-xl-3">
-            <div class="border rounded p-3 h-100" style="background: rgba(255,255,255,0.03);">
-              <small class="d-block mb-1" style="color: var(--color-texto-suave);">RPE medio</small>
+            <div class="border rounded p-3 h-100 progreso-card">
+              <small class="d-block mb-1 progreso-card-label">RPE medio</small>
               <div class="fs-4 fw-bold">
                 <?php echo $rpeMedio !== null ? fmtVol($rpeMedio) : '-'; ?>
               </div>
@@ -253,124 +262,30 @@ $chartGruposVol = array_map(fn ($d) => round($d['volumen'], 2), array_values($re
 
       <?php endif; ?>
 
-      <div class="sesion-footer-actions mt-4">
-        <button class="btn btn-primary btn-lg boton-principal" type="button" onclick="window.location.href='<?php echo BASE_URL; ?>index.php?vista=crearSesionEntreno'">
-          Nueva sesion
-        </button>
-        <button class="btn btn-secondary btn-lg boton-secundario" type="button" onclick="window.location.href='<?php echo BASE_URL; ?>index.php?vista=clienteDashboard'">
-          Volver
-        </button>
-      </div>
+ <div class="sesion-footer-actions mt-4">
+  <a class="btn btn-primary btn-lg boton-principal" href="<?php echo BASE_URL; ?>index.php?vista=crearSesionEntreno">
+    Nueva sesion
+  </a>
+  <a class="btn btn-secondary btn-lg boton-secundario" href="<?php echo BASE_URL; ?>index.php?vista=clienteDashboard">
+    Volver
+  </a>
+</div>
     </section>
   </main>
 
-  <?php if ($totalSesiones > 0): ?>
-  <script>
-    const chartMeses    = <?php echo json_encode(array_values($chartMeses), JSON_UNESCAPED_UNICODE); ?>;
-    const chartSesiones = <?php echo json_encode(array_values($chartSesiones), JSON_UNESCAPED_UNICODE); ?>;
-    const chartVolumen  = <?php echo json_encode(array_values($chartVolumen), JSON_UNESCAPED_UNICODE); ?>;
-    const chartGrupos   = <?php echo json_encode(array_values($chartGrupos), JSON_UNESCAPED_UNICODE); ?>;
-    const chartGruposVol = <?php echo json_encode(array_values($chartGruposVol), JSON_UNESCAPED_UNICODE); ?>;
-
-    // Gráfico evolución mensual (barras + línea)
-    new Chart(document.getElementById('graficaMensual'), {
-      data: {
-        labels: chartMeses,
-        datasets: [
-          {
-            type: 'bar',
-            label: 'Sesiones',
-            data: chartSesiones,
-            backgroundColor: 'rgba(37, 99, 235, 0.55)',
-            borderColor: 'rgba(37, 99, 235, 0.9)',
-            borderWidth: 1,
-            yAxisID: 'ySesiones'
-          },
-          {
-            type: 'line',
-            label: 'Volumen (kg)',
-            data: chartVolumen,
-            borderColor: 'rgba(14, 165, 233, 0.9)',
-            backgroundColor: 'rgba(14, 165, 233, 0.12)',
-            borderWidth: 2,
-            pointRadius: 4,
-            tension: 0.3,
-            fill: true,
-            yAxisID: 'yVolumen'
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { labels: { color: '#e5e7eb' } }
-        },
-        scales: {
-          x: {
-            ticks: { color: '#94a3b8' },
-            grid:  { color: 'rgba(255,255,255,0.06)' }
-          },
-          ySesiones: {
-            type: 'linear',
-            position: 'left',
-            ticks: { color: '#94a3b8', stepSize: 1 },
-            grid: { color: 'rgba(255,255,255,0.06)' },
-            title: { display: true, text: 'Sesiones', color: '#94a3b8' }
-          },
-          yVolumen: {
-            type: 'linear',
-            position: 'right',
-            ticks: { color: '#94a3b8' },
-            grid: { drawOnChartArea: false },
-            title: { display: true, text: 'Volumen (kg)', color: '#94a3b8' }
-          }
-        }
-      }
-    });
-
-    // Gráfico grupos musculares (barras horizontales)
-    new Chart(document.getElementById('graficaGrupos'), {
-      type: 'bar',
-      data: {
-        labels: chartGrupos,
-        datasets: [{
-          label: 'Volumen (kg)',
-          data: chartGruposVol,
-          backgroundColor: [
-            'rgba(37,99,235,0.6)',
-            'rgba(14,165,233,0.6)',
-            'rgba(34,197,94,0.6)',
-            'rgba(234,179,8,0.6)',
-            'rgba(239,68,68,0.6)',
-            'rgba(168,85,247,0.6)',
-            'rgba(249,115,22,0.6)',
-            'rgba(20,184,166,0.6)'
-          ],
-          borderColor: 'rgba(255,255,255,0.15)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        indexAxis: 'y',
-        responsive: true,
-        plugins: {
-          legend: { display: false }
-        },
-        scales: {
-          x: {
-            ticks: { color: '#94a3b8' },
-            grid:  { color: 'rgba(255,255,255,0.06)' },
-            title: { display: true, text: 'Volumen (kg)', color: '#94a3b8' }
-          },
-          y: {
-            ticks: { color: '#94a3b8' },
-            grid:  { color: 'rgba(255,255,255,0.06)' }
-          }
-        }
-      }
-    });
-  </script>
+    <?php if ($totalSesiones > 0): ?>
+    <script id="miProgresoData" type="application/json">
+      <?php
+      echo json_encode([
+          'chartMeses' => array_values($chartMeses),
+          'chartSesiones' => array_values($chartSesiones),
+          'chartVolumen' => array_values($chartVolumen),
+          'chartGrupos' => array_values($chartGrupos),
+          'chartGruposVol' => array_values($chartGruposVol),
+      ], JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+        ?>
+    </script>
   <?php endif; ?>
+
 </body>
 </html>
