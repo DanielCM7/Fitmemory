@@ -14,6 +14,23 @@ function cierreAnalogico()
     exit();
 }
 
+function cierreAnalogicoConMensaje()
+{
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    // Eliminamos datos de la sesión en el lado cliente
+    session_unset();
+    // Eliminamos datos de la sesión en el lado servidor
+    session_destroy();
+    // Guardar un mensaje de cierre de sesión en una variable de sesión temporal
+    session_start();
+    $_SESSION['exito'] = "Sesion cerrada correctamente.";
+    // Redirigir al usuario al index con mensaje de cierre de sesión
+    header("Location: ../../index.php?vista=inicio&mensaje=cierre");
+    exit();
+}
+
 // Vamos a crear un cierre programado a los 30 minutos
 // TODO: Revisar como hacía para que no se cerrase si hay actividad. Ahora mismo se cierra incluso si hay actividad.
 function cierreProgramado()
@@ -36,5 +53,3 @@ function cierreProgramado()
         }
     }
 }
-
-?>

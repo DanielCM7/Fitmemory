@@ -23,18 +23,23 @@ function cabeceraWeb()
     HTML;
 
         $menuUsuario = <<<HTML
-    <button
-        class="btn btn-outline-light btn-sm d-flex align-items-center gap-2 topbar-boton topbar-boton-ancho"
-        type="button"
-        onclick="window.location.href='{$baseUrl}src/controlador/cierre_sesion.php'"
-        >
-        <span>Cerrar sesion</span>
-        <i class="bi bi-door-open"></i>
-        </button>
+
+
+        <form class = "m-0" method ="POST" action="{$baseUrl}src/controlador/cierre_sesion.php">
+            <button
+                  class="btn btn-outline-light btn-sm d-flex align-items-center gap-2 topbar-boton topbar-boton-ancho w-100"
+        type="submit"
+                name="cerrar_sesion"
+                >
+                <span>Cerrar sesión</span>
+                <i class="bi bi-door-open"></i>
+            </button>
+        </form>
 
         <button
         class="btn btn-outline-light btn-sm d-flex align-items-center gap-2 topbar-boton topbar-boton-ancho"
         type="button"
+        onclick="window.location.href='{$baseUrl}index.php?vista=editarPerfil'"
         >
         <span>Editar perfil</span>
         <i class="bi bi-person-circle"></i>
