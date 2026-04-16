@@ -6,7 +6,7 @@ class crearUsuarioTest extends TestCase
 {
 public function testFecha()
 {
-$fechaNac='2012-05-14';
+$fechaNac='2000-05-14';
 $resultado=$this->validarFecha($fechaNac);
 $this->assertTrue($resultado, "La fecha es válida");
 }
@@ -14,7 +14,7 @@ private function validarFecha ($fecha)
 {
     if (empty($fecha)) return false;
     $anio =date('Y', strtotime($fecha));
-    return $anio>=2010 && $anio<=date('Y');
+    return $anio<=2010 && $anio<=date('Y');
 }
 public function testContrasena()
 {

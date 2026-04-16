@@ -1,9 +1,13 @@
 <?php
-//TODO: Ver si se puede integrar de otra forma
 
-// Llamamos a las funciones controlador
 require_once "cierre_funciones.php";
-// Usamos la función de cerrar sesión
-cierreAnalogico();
 
-?>
+//Si cierra correctamente, redirige a la página de inicio de sesión con mensaje de éxito
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: ../../index.php");
+    exit();
+
+}
+
+cierreAnalogicoConMensaje();

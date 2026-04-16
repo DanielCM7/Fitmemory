@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-03-2026 a las 21:06:04
+-- Tiempo de generación: 16-04-2026 a las 19:25:51
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -302,7 +302,7 @@ INSERT INTO `grupos_musculares` (`id_grupo`, `nombre`, `descripcion`) VALUES
 
 CREATE TABLE `roles` (
   `id_rol` int(11) NOT NULL,
-  `nombre_rol` varchar(55) NOT NULL UNIQUE -- importante que sea unique o dará problemas luego
+  `nombre_rol` varchar(55) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -310,9 +310,9 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id_rol`, `nombre_rol`) VALUES
+(3, 'administrador'),
 (1, 'cliente'),
-(2, 'entrenador'),
-(3, 'administrador');
+(2, 'entrenador');
 
 -- --------------------------------------------------------
 
@@ -397,6 +397,29 @@ CREATE TABLE `sesiones` (
   `comentario` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `sesiones`
+--
+
+INSERT INTO `sesiones` (`id_sesion`, `id_usuario`, `fecha`, `comentario`) VALUES
+(2, 1, '2026-04-01 00:00:00', 'Hoy me he sentido un poco perezoso'),
+(3, 1, '2026-04-02 00:00:00', 'Deberia mejorar la tecnica de biceps'),
+(5, 1, '2026-04-01 00:00:00', ''),
+(6, 1, '2026-04-01 00:00:00', ''),
+(7, 1, '2026-04-03 00:00:00', ''),
+(8, 1, '2026-04-03 00:00:00', 'Hoy me he sentido bien con los pesos. Debería mejorar la técnica.'),
+(9, 1, '2026-04-05 00:00:00', ''),
+(10, 1, '2026-04-05 00:00:00', ''),
+(11, 1, '2026-01-10 10:00:00', 'Buen entreno de pecho, me senti fuerte'),
+(12, 1, '2026-01-20 18:30:00', 'Entreno de espalda, buena conexion muscular'),
+(13, 1, '2026-02-05 09:00:00', 'Pierna fuerte, buenas sensaciones en sentadilla'),
+(14, 1, '2026-02-14 17:00:00', 'Hombro y trapecio'),
+(15, 1, '2026-02-25 11:00:00', 'Pecho de vuelta, subi peso en press banca'),
+(16, 1, '2026-03-03 10:30:00', 'Espalda muy bien, subida en remo con barra'),
+(17, 1, '2026-03-11 18:00:00', 'Brazo aislado, buena congestion'),
+(18, 1, '2026-03-19 09:30:00', 'Pierna dura pero bien'),
+(19, 1, '2026-03-27 17:30:00', 'Pecho con volumen alto esta semana');
+
 -- --------------------------------------------------------
 
 --
@@ -414,6 +437,100 @@ CREATE TABLE `sesiones_ejercicios` (
   `rpe` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `sesiones_ejercicios`
+--
+
+INSERT INTO `sesiones_ejercicios` (`id_sesion_ejercicio`, `id_sesion`, `id_ejercicio`, `num_serie`, `repeticion_real`, `peso_real`, `descanso_real`, `rpe`) VALUES
+(3, 2, 79, 1, 12, 20.00, 60, 6),
+(4, 2, 79, 2, 12, 20.00, 60, 6),
+(5, 2, 79, 3, 12, 20.00, 60, 6),
+(6, 3, 22, 1, 8, 10.00, 90, 9),
+(7, 3, 22, 2, 8, 10.00, 90, 9),
+(8, 3, 22, 3, 8, 10.00, 90, 9),
+(9, 3, 22, 4, 8, 10.00, 90, 9),
+(15, 5, 10, 1, 12, 0.00, 90, 0),
+(16, 5, 10, 2, 12, 0.00, 90, 0),
+(17, 5, 10, 3, 12, 0.00, 90, 0),
+(18, 6, 92, 1, 8, 30.00, 90, 0),
+(19, 6, 92, 2, 8, 30.00, 90, 0),
+(20, 6, 92, 3, 8, 30.00, 90, 0),
+(21, 6, 12, 1, 8, 50.00, 90, 0),
+(22, 6, 12, 2, 8, 50.00, 90, 0),
+(23, 6, 12, 3, 8, 50.00, 90, 0),
+(24, 7, 101, 1, 3, 3.00, 90, 0),
+(25, 7, 101, 2, 3, 3.00, 90, 0),
+(26, 7, 101, 3, 3, 3.00, 90, 0),
+(27, 8, 90, 1, 12, 20.00, 60, 0),
+(28, 8, 90, 2, 12, 20.00, 60, 0),
+(29, 8, 90, 3, 12, 20.00, 60, 0),
+(30, 8, 19, 1, 12, 22.00, 60, 0),
+(31, 8, 19, 2, 12, 22.00, 60, 0),
+(32, 8, 19, 3, 12, 22.00, 60, 0),
+(33, 8, 43, 1, 20, 0.00, 0, 0),
+(34, 8, 43, 2, 20, 0.00, 0, 0),
+(35, 8, 43, 3, 20, 0.00, 0, 0),
+(36, 9, 161, 1, 12, 50.00, 60, 0),
+(37, 9, 161, 2, 12, 50.00, 60, 0),
+(38, 9, 161, 3, 12, 50.00, 60, 0),
+(39, 9, 123, 1, 12, 20.00, 60, 0),
+(40, 9, 123, 2, 12, 20.00, 60, 0),
+(41, 9, 123, 3, 12, 20.00, 60, 0),
+(42, 10, 18, 1, 12, 30.00, 60, 0),
+(43, 10, 18, 2, 12, 30.00, 60, 0),
+(44, 10, 18, 3, 12, 30.00, 60, 0),
+(45, 10, 164, 1, 12, 30.00, 60, 0),
+(46, 10, 164, 2, 12, 30.00, 60, 0),
+(47, 10, 164, 3, 12, 30.00, 60, 0),
+(48, 10, 1, 1, 10, 80.00, 120, 7),
+(49, 10, 1, 2, 10, 80.00, 120, 8),
+(50, 10, 1, 3, 8, 82.50, 120, 9),
+(51, 10, 5, 1, 12, 16.00, 90, 7),
+(52, 10, 5, 2, 12, 16.00, 90, 7),
+(53, 11, 11, 1, 10, 60.00, 120, 7),
+(54, 11, 11, 2, 10, 60.00, 120, 8),
+(55, 11, 12, 1, 10, 70.00, 120, 8),
+(56, 11, 12, 2, 8, 75.00, 120, 9),
+(57, 11, 18, 1, 15, 15.00, 90, 6),
+(58, 13, 64, 1, 8, 90.00, 150, 8),
+(59, 13, 64, 2, 8, 90.00, 150, 9),
+(60, 13, 64, 3, 6, 95.00, 150, 9),
+(61, 13, 66, 1, 12, 100.00, 90, 7),
+(62, 13, 66, 2, 12, 100.00, 90, 7),
+(63, 14, 35, 1, 10, 60.00, 120, 7),
+(64, 14, 35, 2, 10, 60.00, 120, 8),
+(65, 14, 37, 1, 15, 10.00, 90, 7),
+(66, 14, 37, 2, 15, 10.00, 90, 7),
+(67, 14, 37, 3, 12, 12.00, 90, 8),
+(68, 15, 1, 1, 10, 85.00, 120, 8),
+(69, 15, 1, 2, 10, 85.00, 120, 8),
+(70, 15, 1, 3, 8, 87.50, 120, 9),
+(71, 15, 3, 1, 10, 60.00, 120, 7),
+(72, 15, 3, 2, 9, 62.50, 120, 8),
+(73, 16, 10, 1, 8, 0.00, 90, 8),
+(74, 16, 10, 2, 8, 0.00, 90, 9),
+(75, 16, 12, 1, 10, 75.00, 120, 8),
+(76, 16, 12, 2, 10, 75.00, 120, 8),
+(77, 16, 12, 3, 8, 80.00, 120, 9),
+(78, 17, 19, 1, 12, 30.00, 90, 7),
+(79, 17, 19, 2, 12, 30.00, 90, 7),
+(80, 17, 19, 3, 10, 32.50, 90, 8),
+(81, 17, 28, 1, 15, 30.00, 90, 7),
+(82, 17, 28, 2, 15, 30.00, 90, 7),
+(83, 17, 28, 3, 12, 35.00, 90, 8),
+(84, 18, 64, 1, 8, 95.00, 150, 9),
+(85, 18, 64, 2, 8, 95.00, 150, 9),
+(86, 18, 64, 3, 6, 100.00, 180, 9),
+(87, 18, 67, 1, 15, 50.00, 90, 7),
+(88, 18, 67, 2, 15, 50.00, 90, 7),
+(89, 19, 1, 1, 10, 87.50, 120, 8),
+(90, 19, 1, 2, 10, 87.50, 120, 8),
+(91, 19, 1, 3, 8, 90.00, 120, 9),
+(92, 19, 5, 1, 12, 18.00, 90, 7),
+(93, 19, 5, 2, 12, 18.00, 90, 8),
+(94, 19, 8, 1, 10, 0.00, 90, 8),
+(95, 19, 8, 2, 10, 0.00, 90, 8);
+
 -- --------------------------------------------------------
 
 --
@@ -421,31 +538,28 @@ CREATE TABLE `sesiones_ejercicios` (
 --
 
 CREATE TABLE `usuarios` (
-  `id_usuario` int(10) UNSIGNED NOT NULL, -- He metido un unsigned para optimizar
+  `id_usuario` int(10) NOT NULL,
   `id_rol` int(10) NOT NULL,
-  `nombre_usuario` varchar(255) NOT NULL UNIQUE, -- Paula: Añado esto para poder iniciar sesión y que sea único
+  `nombre_usuario` varchar(255) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `apellidos` varchar(255) NOT NULL,
-  `fecha_nacimiento` DATE NOT NULL, -- Cambio a fecha para poder calcular la edad con el paso del tiempo
+  `fecha_nacimiento` date NOT NULL,
   `contrasena_hash` varchar(255) NOT NULL,
-  -- ELIMINO LA COLUMNA PERFIL, DA PROBLEMAS: Básicamente no esta unida a id_rol, por ejemplo si pones 2 debería ser entrenador, pero la falta de conexión deja poner cliente. Esto genera falta de coherencia. Dejamos sólo id_rol que es la foreign key que conecta con los roles bien.
   `fecha_registro` datetime NOT NULL,
-  `activo` int(2) NOT NULL
+  `activo` int(2) NOT NULL,
+  `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
--- Paula: He cambiado las contraseñas para que estén con el hash hecho con sha256 como vimos en clase
--- Las contraseñas son todas ahora mismo 123456
-
-INSERT INTO `usuarios` (`id_usuario`, `id_rol`, `nombre_usuario`, `nombre`, `apellidos`, `fecha_nacimiento`, `contrasena_hash`, `fecha_registro`, `activo`) VALUES
-(1, 1, 'dokiluz', 'David', 'Hernandez Rodriguez', '1991-08-16', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:54:38', 1),
-(2, 1, 'staluap','Paula', 'Serrano Torrecillas', '1996-06-26', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:54:24', 1),
-(3, 1, 'danielCM','Daniel', 'Cortés Martín', '2001-01-15', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:51:14', 1),
-(4, 1, 'itziar', 'Itziar', 'Etxebeste Etxeberria', '1989-09-03', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:51:14', 1),
-(5, 3, 'admin', 'Administrador', 'Persona Administradora', '1984-02-29', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:51:14', 1);
+INSERT INTO `usuarios` (`id_usuario`, `id_rol`, `nombre_usuario`, `nombre`, `apellidos`, `fecha_nacimiento`, `contrasena_hash`, `fecha_registro`, `activo`, `email`) VALUES
+(1, 1, 'dokiluz', 'David', 'Hernandez Rodriguez', '1992-12-29', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:54:38', 1, 'david.92hdez@gmail.com'),
+(2, 1, 'staluap', 'Paula', 'Serrano Torrecillas', '1996-06-26', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:54:24', 1, ''),
+(3, 1, 'danielCM', 'Daniel', 'Cortés Martín', '2001-01-15', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:51:14', 1, ''),
+(4, 1, 'itziar', 'Itziar', 'Etxebeste Etxeberria', '1989-09-03', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:51:14', 1, ''),
+(5, 3, 'admin', 'Administrador', 'Persona Administradora', '1984-02-29', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-03-08 19:51:14', 1, '');
 
 --
 -- Índices para tablas volcadas
@@ -475,7 +589,8 @@ ALTER TABLE `grupos_musculares`
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id_rol`);
+  ADD PRIMARY KEY (`id_rol`),
+  ADD UNIQUE KEY `nombre_rol` (`nombre_rol`);
 
 --
 -- Indices de la tabla `rutinas`
@@ -513,6 +628,7 @@ ALTER TABLE `sesiones_ejercicios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `nombre_usuario` (`nombre_usuario`),
   ADD KEY `id_rol` (`id_rol`);
 
 --
@@ -553,19 +669,19 @@ ALTER TABLE `rutinas_ejercicios`
 -- AUTO_INCREMENT de la tabla `sesiones`
 --
 ALTER TABLE `sesiones`
-  MODIFY `id_sesion` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_sesion` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `sesiones_ejercicios`
 --
 ALTER TABLE `sesiones_ejercicios`
-  MODIFY `id_sesion_ejercicio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_sesion_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_usuario` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas

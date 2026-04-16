@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const inputFecha = document.getElementById("fecha");
+  const inputFecha = document.getElementById("fechaNac");
   if (!inputFecha || typeof window.initFitmemoryDatepicker !== "function") {
     return;
   }
@@ -10,9 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
     : null;
 
   window.initFitmemoryDatepicker(inputFecha, {
-    defaultDate: fechaIso || new Date(),
-    startDate: fechaIso || new Date(),
-    minDate: "2000-01-01",
+    defaultDate: fechaIso,
+    startDate: fechaIso || "1990-01-01",
+    minDate: "1900-01-01",
     maxDate: new Date(),
     disableNavWhenOutOfRange: false,
     position: "auto center",
