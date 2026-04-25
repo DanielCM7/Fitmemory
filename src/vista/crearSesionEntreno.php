@@ -15,14 +15,15 @@ unset($_SESSION['exito'], $_SESSION['error']);
 
 $gruposMusculares = ControladorBD::listarGruposMusculares() ?? [];
 $ejerciciosPorGrupo = ControladorBD::listarEjerciciosPorGrupo();
-
 ?>
 
+<!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fitmemory - Nueva Sesion</title>
+  <title>Nueva Sesion</title>
+  <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>assets/brand/CB0E31FB-D18E-4582-85D5-47B13AA82F4D.png"> <link rel="apple-touch-icon" href="<?php echo BASE_URL; ?>assets/brand/CB0E31FB-D18E-4582-85D5-47B13AA82F4D.png">
    <link
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
   rel="stylesheet"
@@ -31,12 +32,12 @@ $ejerciciosPorGrupo = ControladorBD::listarEjerciciosPorGrupo();
 />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js" defer></script>
-<script src="<?php echo BASE_URL; ?>assets/js/crearSesionEntreno.js" defer></script>
-<script src="<?php echo BASE_URL; ?>/assets/js/ejerciciosPorGrupo.js" defer></script>
-<script> window.ejerciciosPorGrupo = <?php echo json_encode($ejerciciosPorGrupo, JSON_UNESCAPED_UNICODE); ?>; </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/air-datepicker@3.6.0/air-datepicker.css"> 
+<script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.6.0/air-datepicker.js" defer></script>
+  <script src="<?php echo BASE_URL; ?>assets/js/fitmemoryDatepicker.js" defer></script>
+  <script src="<?php echo BASE_URL; ?>assets/js/crearSesionEntreno.js" defer></script>
+  <script src="<?php echo BASE_URL; ?>assets/js/ejerciciosPorGrupo.js" defer></script>
+  <script> window.ejerciciosPorGrupo = <?php echo json_encode($ejerciciosPorGrupo, JSON_UNESCAPED_UNICODE); ?>; </script>
 </head>
 <body class="app-body d-flex align-items-center py-4 bg-body-tertiary">
   <main class="app-main app-main-sesion w-100 m-auto">
@@ -57,15 +58,29 @@ $ejerciciosPorGrupo = ControladorBD::listarEjerciciosPorGrupo();
 
       <div class="sesion-builder-grid">
         <aside class="sesion-sidebar">
-          <section class="sesion-bloque">
-            <div class="sesion-bloque-titulo">Dia de entreno</div>
-            <div class="sesion-date-card">
-              <div class="sesion-date-icon">
-                <i class="bi bi-calendar3"></i>
-              </div>
-              <input type="text" id="fecha" name="fecha" class="form-control formulario-campo" value="<?php echo date('Y-m-d'); ?>" required readonly/>
-            </div>
-          </section>
+       <section class="sesion-bloque">
+  <div class="sesion-bloque-titulo">Dia de entreno</div>
+
+  <div class="mis-sesiones-picker">
+    <label for="fecha" class="mis-sesiones-filter">
+      <span class="mis-sesiones-filter-label">
+        <i class="bi bi-calendar3"></i>
+        Selecciona la fecha
+      </span>
+
+      <input
+        type="text"
+        id="fecha"
+        name="fecha"
+        class="form-control formulario-campo mis-sesiones-input"
+        value="<?php echo date('Y-m-d'); ?>"
+        placeholder="Selecciona una fecha"
+        required
+        readonly
+      />
+    </label>
+  </div>
+</section>
 
           <section class="sesion-bloque">
             <div class="sesion-bloque-titulo">Comentario</div>
@@ -147,9 +162,5 @@ $ejerciciosPorGrupo = ControladorBD::listarEjerciciosPorGrupo();
       </div>
     </form>
   </main>
-
-  <script>
-    window.ejerciciosPorGrupo = <?php echo json_encode($ejerciciosPorGrupo, JSON_UNESCAPED_UNICODE); ?>;
-  </script>
 </body>
 </html>

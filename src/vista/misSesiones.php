@@ -14,12 +14,13 @@ unset($_SESSION['exito'], $_SESSION['error']);
 
 $sesionesAgrupadas = ControladorBD::obtenerSesionesAgrupadasPorUsuario($_SESSION['id_usuario']) ?? [];
 ?>
-
+<!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fitmemory - Mis Sesiones</title>
+  <title>Sesiones</title>
+  <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>assets/brand/CB0E31FB-D18E-4582-85D5-47B13AA82F4D.png"> <link rel="apple-touch-icon" href="<?php echo BASE_URL; ?>assets/brand/CB0E31FB-D18E-4582-85D5-47B13AA82F4D.png">
   <link
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
   rel="stylesheet"
@@ -28,10 +29,10 @@ $sesionesAgrupadas = ControladorBD::obtenerSesionesAgrupadasPorUsuario($_SESSION
 />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/air-datepicker@3.6.0/air-datepicker.css"> 
+  <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.6.0/air-datepicker.js" defer></script>
+  <script src="<?php echo BASE_URL; ?>assets/js/fitmemoryDatepicker.js" defer></script>
   <script src="<?php echo BASE_URL; ?>assets/js/misSesiones.js" defer></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js" defer></script>
 </head>
 <body class="app-body d-flex align-items-center py-4 bg-body-tertiary">
   <main class="app-main app-main-sesion w-100 m-auto">
@@ -67,6 +68,10 @@ $sesionesAgrupadas = ControladorBD::obtenerSesionesAgrupadasPorUsuario($_SESSION
       readonly
     />
   </label>
+
+  <button id="limpiarFiltroFecha" class="btn btn-outline-light mis-sesiones-reset" type="button">
+    Limpiar fecha
+  </button>
 </div>
 
   <p id="mensajeInicial" class="text-center" style="color: var(--color-texto-suave); margin-top: 1.5rem;">

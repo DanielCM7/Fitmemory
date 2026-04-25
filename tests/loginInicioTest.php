@@ -2,13 +2,13 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-class crearloginInicioTest extends TestCase
+class loginInicioTest extends TestCase
 {
 public function testUsuario()
 {
-$usuario='estibaliz';
+$usuario='david';
 $resultado=$this->validarUsuarioBD($usuario);
-$this->assertFalse($resultado, "El usuario no existe");
+$this->assertTrue($resultado, "El usuario existe");
 }
 private function validarUsuarioBD ($usuario)
 {
@@ -21,4 +21,5 @@ private function validarUsuarioBD ($usuario)
         }
 }
 }
+
 ?>

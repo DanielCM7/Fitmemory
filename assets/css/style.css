@@ -559,7 +559,9 @@ select option {
 
 .mis-sesiones-picker {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
   margin-bottom: 1.5rem;
 }
 
@@ -590,14 +592,155 @@ select option {
   font-size: 1.15rem;
 }
 
-.mis-sesiones-input,
-.mis-sesiones-picker .flatpickr-input {
+.mis-sesiones-input {
   min-height: 50px;
   text-align: center;
   font-weight: 700;
   letter-spacing: 0.02em;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.05);
+}
+
+.mis-sesiones-reset {
+  min-width: 180px;
+  border-radius: 999px;
+  padding-inline: 1.25rem;
+}
+
+.mis-sesiones-reset:disabled {
+  opacity: 0.55;
+}
+
+/* ==================================================
+   PICKER (COMPARTIDO: Mis Sesiones, Crear Sesion, Editar Perfil)
+   ================================================== */
+
+.mis-sesiones-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.mis-sesiones-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: min(100%, 420px);
+  padding: 0.9rem 1rem;
+  border-radius: 18px;
+  background: rgba(30, 41, 59, 0.48);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.mis-sesiones-filter-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--color-texto);
+}
+
+.mis-sesiones-filter-label i {
+  color: var(--color-secundario);
+  font-size: 1.15rem;
+}
+
+.mis-sesiones-input {
+  min-height: 50px;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mis-sesiones-reset {
+  min-width: 180px;
+  border-radius: 999px;
+  padding-inline: 1.25rem;
+}
+
+.mis-sesiones-reset:disabled {
+  opacity: 0.55;
+}
+
+/* ==================================================
+   AIR DATEPICKER (UNICO)
+   ================================================== */
+
+.air-datepicker {
+  background: rgba(15, 23, 42, 0.99) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.42) !important;
+  color: var(--color-texto) !important;
+  padding: 0.55rem !important;
+  width: min(340px, calc(100vw - 1.5rem)) !important;
+  z-index: 1200 !important;
+}
+
+.air-datepicker-nav {
+  border-bottom: 0 !important;
+  padding: 0.35rem 0.2rem 0.6rem !important;
+}
+
+.air-datepicker-nav--title {
+  color: var(--color-texto) !important;
+  font-weight: 700 !important;
+}
+
+.air-datepicker-nav--action {
+  color: var(--color-texto) !important;
+  border-radius: 10px !important;
+}
+
+.air-datepicker-nav--action:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.air-datepicker-body--day-name {
+  color: var(--color-texto-suave) !important;
+  font-weight: 700 !important;
+}
+
+.air-datepicker-cell {
+  border-radius: 10px !important;
+  color: var(--color-texto) !important;
+}
+
+.air-datepicker-cell.-current- {
+  border: 1px solid rgba(14, 165, 233, 0.6) !important;
+  background: transparent !important;
+}
+
+.air-datepicker-cell.-selected-,
+.air-datepicker-cell.-selected-.-current- {
+  background: linear-gradient(
+    135deg,
+    var(--color-primario),
+    var(--color-secundario)
+  ) !important;
+  color: #fff !important;
+}
+
+.air-datepicker-cell.-focus-:not(.-selected-) {
+  background: rgba(37, 99, 235, 0.14) !important;
+}
+
+.air-datepicker-cell.-disabled- {
+  color: rgba(148, 163, 184, 0.32) !important;
+}
+
+@media (max-width: 576px) {
+  .air-datepicker {
+    width: calc(100vw - 1rem) !important;
+    min-width: calc(100vw - 1rem) !important;
+  }
 }
 
 /* ==================================================
@@ -864,116 +1007,19 @@ select option {
 }
 
 /* ==================================================
-   AJUSTES DE CALENDARIO FLATPICKR
-     - Para que se adapte al tema oscuro y al diseño general
+   MI PROGRESO
    ================================================== */
 
-.flatpickr-calendar {
-  background: rgba(15, 23, 42, 0.99) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 18px !important;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.42) !important;
-  padding: 0.55rem !important;
-  width: 340px !important;
-  min-width: 340px !important;
+.progreso-intro {
+  color: var(--color-texto-suave);
 }
 
-.flatpickr-calendar.open {
-  margin-top: 0.45rem;
+.progreso-card {
+  background: rgba(255, 255, 255, 0.03);
 }
 
-.flatpickr-months,
-.flatpickr-weekdays {
-  background: transparent !important;
-  width: 100% !important;
-}
-
-.flatpickr-months .flatpickr-month {
-  color: var(--color-texto) !important;
-  fill: var(--color-texto) !important;
-}
-
-.flatpickr-current-month {
-  padding-top: 0.25rem !important;
-}
-
-.flatpickr-current-month .flatpickr-monthDropdown-months,
-.flatpickr-current-month input.cur-year {
-  color: var(--color-texto) !important;
-  font-weight: 700;
-}
-
-.flatpickr-weekday {
-  color: var(--color-texto-suave) !important;
-  font-weight: 700;
-  max-width: none !important;
-  width: calc(100% / 7) !important;
-}
-
-.flatpickr-day {
-  color: var(--color-texto) !important;
-  border-radius: 10px !important;
-  border: 1px solid transparent !important;
-  max-width: none !important;
-  width: calc(100% / 7) !important;
-}
-
-.flatpickr-day:hover {
-  background: rgba(37, 99, 235, 0.14) !important;
-  border-color: rgba(37, 99, 235, 0.22) !important;
-}
-
-.flatpickr-day.selected,
-.flatpickr-day.selected:hover {
-  background: linear-gradient(
-    135deg,
-    var(--color-primario),
-    var(--color-secundario)
-  ) !important;
-  color: #ffffff !important;
-  border-color: transparent !important;
-}
-
-.flatpickr-day.today {
-  border-color: rgba(14, 165, 233, 0.6) !important;
-}
-
-.flatpickr-day.prevMonthDay,
-.flatpickr-day.nextMonthDay,
-.flatpickr-day.flatpickr-disabled {
-  color: rgba(148, 163, 184, 0.32) !important;
-}
-
-.flatpickr-months .flatpickr-prev-month,
-.flatpickr-months .flatpickr-next-month {
-  fill: var(--color-texto) !important;
-  color: var(--color-texto) !important;
-}
-
-.flatpickr-months .flatpickr-prev-month:hover svg,
-.flatpickr-months .flatpickr-next-month:hover svg {
-  fill: #ffffff !important;
-}
-
-.flatpickr-wrapper {
-  width: 100%;
-}
-
-.flatpickr-calendar {
-  margin-top: 0.6rem !important;
-}
-
-.flatpickr-calendar.open {
-  display: inline-block;
-  z-index: 1200;
-}
-
-.flatpickr-rContainer,
-.flatpickr-days,
-.dayContainer {
-  width: 100% !important;
-  min-width: 100% !important;
-  max-width: 100% !important;
+.progreso-card-label {
+  color: var(--color-texto-suave);
 }
 
 /* ==================================================
