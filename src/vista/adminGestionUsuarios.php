@@ -2,28 +2,27 @@
 // Antes de cargar los usuarios, comprobamos si se está enviado un formulario de elminar usuario
 // Así se elemina al usuario antes de cargar los usuario que permanecen
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['accion'] === 'eliminar') {
-    $id_usuario = $_POST['id_usuario'];
+    $id_usuario = $_POST['id'];
     ControladorBD::eliminarUsuario($id_usuario);
 }
 
 // También comprobamos si se ha recibido algún formulario de actualización y se realiza si es así
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['accion'] === 'actualizar') {
-    $id_usuario = $_POST['id_usuario'];
+    $id_usuario = $_POST['id'];
     $rol = $_POST['rol'];
     $nombre = $_POST['nombre'];
     $apellidos = $_POST['apellidos'];
     $fecha_nacimiento = $_POST['fecha_nacimiento'];
-    $contrasena_hash = $_POST['contrasena_hash'];
+    $contrasena_hash = $_POST['contraseña'];
     $id_rol  = ControladorBD::getRolIdPorNombreRol($rol);
     ControladorBD::actualizarUsuario($id_usuario, $contrasena_hash, $nombre, $apellidos, $id_rol, $fecha_nacimiento);
 }
 
 
-// Almacenamos en una variable el array de usuarios que existen el la base de datos a través de la función listar usuarios que hemos creado en las funciones controlador bajo la clase ControlUsuarios
+// Obtenemos los datos de usuarios de la BD y generamos la tabla guardada en variable
 $usuarios = ControladorBD::listarUsuarios();
-// Usamos la función vista que convierte un array de usuarios en una tabla
-// Almacenamos en una variable la table para facilitar la inserción en el HTML
-$tablaUsuarios = GeneradorTablasAdmin::tablaUsuarios($usuarios);
+//$tablaUsuarios = GeneradorTablasAdmin::tablaUsuarios($usuarios);
+
 ?>
 
 <html lang="es" data-bs-theme="dark">
@@ -39,6 +38,7 @@ $tablaUsuarios = GeneradorTablasAdmin::tablaUsuarios($usuarios);
 />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body class="app-body d-flex align-items-center py-4 bg-body-tertiary">
@@ -47,7 +47,13 @@ $tablaUsuarios = GeneradorTablasAdmin::tablaUsuarios($usuarios);
         <section class="panel-formulario" style="width: fit-content">
             <h2 class="m-0 mb-4">Gestión de Usuarios</h2>
                 <div class="border rounded p-3 mb-4 table-responsive">
-                    <?php echo $tablaUsuarios ?>
+                    <div style="margin-bottom:20px">
+                        <i class="bi bi-search" style="margin-right:10px"></i>
+                        <input type="text" id="buscador" placeholder="Buscador..." style="width:33%">
+                    </div>
+                    <table id="tabla" class="table table-dark table-striped align-middle mb-0">
+                    </table>
+                    <?php //echo $tablaUsuarios ?>
                 </div>
                 <div class="sesion-footer-actions">
                     <button class="btn btn-primary btn-lg boton-principal" type="button" onclick="window.location.href='./index.php?vista=adminCrearUsuario'">
@@ -59,5 +65,11 @@ $tablaUsuarios = GeneradorTablasAdmin::tablaUsuarios($usuarios);
                 </div>
             </section>
         </main>
+        <script src="<?php echo BASE_URL; ?>assets/js/filtroTablasAdmin.js"></script>
+        <script>
+            let usuarios = <?= json_encode($usuarios) ?>;
+            console.log(usuarios);
+            generarTabla(usuarios);
+        </script>
     </body>
 </html>

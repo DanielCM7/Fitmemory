@@ -9,10 +9,10 @@ class GeneradorTablasAdmin {
     $tablaUsuarios = "";
     // Títulos de columna
     $tablaUsuarios .= <<<HTML
-        <table class="table table-dark table-striped align-middle mb-0">
+        <table id="tabla" class="table table-dark table-striped align-middle mb-0">
         <tr>
-            <th>id_usuario</th>
-            <th>nombre_usuario</th>
+            <th id="bt-id">id_usuario</th>
+            <th id="bt-nombre" style="cursor:pointer">nombre_usuario</th>
             <th>rol</th>
             <th>nombre</th>
             <th>apellidos</th>
@@ -37,7 +37,7 @@ class GeneradorTablasAdmin {
             $fecha_registro = $usuario['fecha_registro'];
             // Concatenamos una fila de la tabla con los datos anteriores, cada uno en su columna correspondiente
             $tablaUsuarios .= <<<HTML
-                <tr>
+                <tr style="display:table-row">
                 <td>$id_usuario</td>
                 <td>$nombre_usuario</td>
                 <td>$rol</td>
