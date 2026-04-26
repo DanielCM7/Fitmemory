@@ -6,7 +6,7 @@ const tabla = document.getElementById("tabla");
 //SE PUIEDEN AÑADIR BOTONES LA TABLA DESDE AQUÍ
 const tiposBt = [
                 {
-                    contenido: "EDITAR",
+                    contenido: "ACTUALIZAR",
                     class: "bi-pencil-square"
                 },
                 {
@@ -60,7 +60,7 @@ function generarTabla(datosTabla) {
             columnas.forEach(columna => {
                 let campo = document.createElement("td");
 
-                campo.textContent = (columna === "contraseña") ? "******" : dato[columna];
+                campo.textContent = (columna === "contrasena_hash") ? "******" : dato[columna];
 
                 fila.appendChild(campo);
             });
@@ -74,13 +74,14 @@ function generarTabla(datosTabla) {
                 formulario.style.margin = "0px";
                 formulario.method = "POST";
 
-                // Inputs formulario EDITAR
-                if (tipo.contenido == "EDITAR"){
+                // Inputs formulario ACTUALIZAR
+                if (tipo.contenido == "ACTUALIZAR"){
                     columnas.forEach(columna => {
                         let input = document.createElement("input");
                         input.type = "hidden";
                         input.name = columna;
                         input.value = dato[columna];
+                        input.formAction = "index.php?vista=adminActualizarUsuario";
                         formulario.appendChild(input);
                     });
                 }
@@ -88,9 +89,9 @@ function generarTabla(datosTabla) {
                 if (tipo.contenido == "ELIMINAR") {
                     let input = document.createElement("input");
                     input.type = "hidden";
-                    input.name = columnas[0];
+                    input.name = "id";
                     input.value = dato[columnas[0]];
-                    formulario.appendChild(input);
+                    formulario.appendChild(input)
                 }
 
                 // Acción
@@ -104,6 +105,15 @@ function generarTabla(datosTabla) {
                 let bt = document.createElement("button");
                 bt.type = "submit";
                 bt.classList.add("btn", "btn-outline-light", "btFormAdmin");
+
+                if (tipo.contenido == "ACTUALIZAR") {
+                    bt.formAction = "index.php?vista=adminActualizarUsuario";
+                }
+                if (tipo.contenido == "ELIMINAR") {
+                    bt.addEventListener('click', () => {
+                        window.location.reload();
+                    });
+                }
 
                 let icono = document.createElement("i");
                 icono.classList.add("bi", tipo.class);
@@ -119,18 +129,6 @@ function generarTabla(datosTabla) {
         });
     }
 }
-
-
-/* VARIABLES   ____________________________________________________________________*/
-//contadores de clicks que se aplican a algunas cabeceras de columna para ayudar a filtrar
-//TABLA USUARIOS
-let clicksId = 0;
-let clickUsuario = 0;
-let clicksRol = 0;
-let clicksNombre = 0;
-let clicksApellidos = 0;
-let clicksFechaNac = 0;
-let clicksFechaNReg = 0;
 
 /* FUNCIONES   ____________________________________________________________________*/
 
@@ -156,22 +154,8 @@ function filtrarUsuarios() {
 
 
 
-
 /* PROCESAMIENTO __________________________________________________________________ */
 
 // Indicamos que al modificar el input del campo de texto con id filtro, se accione filtrarUsuarios
-document.getElementById("buscador").addEventListener("input", filtrarUsuarios);
-
-const botones = document.querySelectorAll('.btFormAdmin');
-botone4s.forEach(boton => {
-    boton.addEventListener("click", );
-})
 
 document.getElementById("buscador").addEventListener("input", filtrarUsuarios);
-
-document.getElementById("bt-nombre").onclick = () => {
-  ordenarTabla(0, true, false);
-};
-document.getElementById("bt-id").onclick = () => {
-  ordenarTabla(2, true, true);
-};

@@ -12,6 +12,7 @@ let apellidos = document.getElementById("idApellidos");
 let fechaNac = document.getElementById("idFechaNac");
 let perfil = document.getElementById("idPerfil");
 let contrasena = document.getElementById("idPassword");
+let email = document.getElementById("idEmail");
 
 // JavaScript para saber la fecha actual _________________________________
 let hoy = new Date();
@@ -40,6 +41,8 @@ const apellidosRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,60}$/;
 const contrasenaRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W]).{8,}$/;
 // Array con los perfiles válidos
 const perfilesValidos = ["Entrenador", "Cliente"];
+// uno o más caracteres que no sean @ ni espacio, @, uno o más caracteres de nuevo, punto, y uno o más caracteres
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
 // DATOS LIMITACIÓN EDAD ___________________________________________
@@ -87,14 +90,17 @@ let apellidosValue = apellidos.value.trim();
 let fechaNacValue = fechaNac.value;
 let perfilValue = perfil.value;
 let contrasenaValue = contrasena.value;
+let emailValue = email.value.trim();
 
 // CONDICIONES DE VALIDACIÓN
 
-    if(perfilesValidos.includes(perfilValue)) {
-        setExito(perfil);
-    } else {
-        setError(perfil, 'El perfil debe ser entrenador o cliente');
-        valido = false;
+    if (perfil != "administrador") {
+        if(perfilesValidos.includes(perfilValue)) {
+            setExito(perfil);
+        } else {
+            setError(perfil, 'El perfil debe ser entrenador o cliente');
+            valido = false;
+        }
     }
 
     if(usuarioValue === '') {
@@ -145,6 +151,16 @@ let contrasenaValue = contrasena.value;
         valido = false;
     } else {
         setExito(fechaNac);
+    }
+
+    if(emailValue === '') {
+        setError(email, 'El campo de correo electrónico no puede quedar vacío');
+        valido = false;
+    } else if (!emailRegex.test(emailValue)) {
+        setError(email, 'Formato de correo electrónico inválido');
+        valido = false;
+    } else {
+        setExito(email);
     }
 
     // Si después de todas las comprobaciones la variable valido sigue siendo true, se envía a validar en php

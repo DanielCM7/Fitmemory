@@ -8,28 +8,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['accion'] === 'eliminar') {
 
 // También comprobamos si se ha recibido algún formulario de actualización y se realiza si es así
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['accion'] === 'actualizar') {
-    $id_usuario = $_POST['id'];
-    $rol = $_POST['rol'];
+    $id_usuario = $_POST['id_usuario'];
+    //$nombre_usuario = $_POST['nombre_usuario'];
+    $rol = $_POST['id_rol'];
     $nombre = $_POST['nombre'];
     $apellidos = $_POST['apellidos'];
     $fecha_nacimiento = $_POST['fecha_nacimiento'];
-    $contrasena_hash = $_POST['contraseña'];
+    $contrasena_hash = $_POST['contrasena_hash'];
+    $email = $_POST['email'];
     $id_rol  = ControladorBD::getRolIdPorNombreRol($rol);
-    ControladorBD::actualizarUsuario($id_usuario, $contrasena_hash, $nombre, $apellidos, $id_rol, $fecha_nacimiento);
+    ControladorBD::actualizarUsuario($id_usuario, $contrasena_hash, $nombre, $apellidos, $id_rol, $fecha_nacimiento, $email);
 }
 
 
 // Obtenemos los datos de usuarios de la BD y generamos la tabla guardada en variable
 $usuarios = ControladorBD::listarUsuarios();
-//$tablaUsuarios = GeneradorTablasAdmin::tablaUsuarios($usuarios);
-
 ?>
 
 <html lang="es" data-bs-theme="dark">
  <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fitmemory - Sesion Guardada</title>
+  <title>Fitmemory - Gestión Usuarios</title>
   <link
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
   rel="stylesheet"
@@ -52,8 +52,8 @@ $usuarios = ControladorBD::listarUsuarios();
                         <input type="text" id="buscador" placeholder="Buscador..." style="width:33%">
                     </div>
                     <table id="tabla" class="table table-dark table-striped align-middle mb-0">
+                        <!-- Se genera con javascript después -->
                     </table>
-                    <?php //echo $tablaUsuarios ?>
                 </div>
                 <div class="sesion-footer-actions">
                     <button class="btn btn-primary btn-lg boton-principal" type="button" onclick="window.location.href='./index.php?vista=adminCrearUsuario'">
@@ -65,7 +65,7 @@ $usuarios = ControladorBD::listarUsuarios();
                 </div>
             </section>
         </main>
-        <script src="<?php echo BASE_URL; ?>assets/js/filtroTablasAdmin.js"></script>
+        <script src="<?php echo BASE_URL; ?>assets/js/tablasAdmin.js"></script>
         <script>
             let usuarios = <?= json_encode($usuarios) ?>;
             console.log(usuarios);

@@ -15,7 +15,7 @@ function enrute()
 
         // Haremos un array que relaciones vistas con roles
         $permisos = [
-            'administrador' => ['adminDashboard', 'adminGestionUsuarios', 'adminAsignarEntrenadores', 'adminGestionarEjercicios'],
+            'administrador' => ['adminDashboard', 'adminGestionUsuarios', 'adminAsignarEntrenadores', 'adminGestionarEjercicios', 'adminCrearUsuario', 'adminActualizarUsuario'],
             'cliente' => ['clienteDashboard', 'crearSesionEntreno', 'misSesiones', 'miProgreso', 'sesionCreada', 'editarPerfil'],
             'entrenador'  => ['entrenadorDashboard'],
             'invitado' => ['inicio', 'crearUsuario']
@@ -43,6 +43,13 @@ function enrute()
                 break;
              case 'adminGestionUsuarios':
                 include_once "src/vista/adminGestionUsuarios.php";
+                break;
+            // Vamos a reutilizar la estructura de una página
+            case 'adminCrearUsuario':
+                include_once "src/vista/crearUsuario.php";
+                break;
+            case 'adminActualizarUsuario':
+                include_once "src/vista/crearUsuario.php";
                 break;
             case 'adminAsignarEntrenadores':
                 include_once "src/vista/adminAsignarEntrenadores.php";
