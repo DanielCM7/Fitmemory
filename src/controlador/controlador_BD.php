@@ -105,10 +105,10 @@ class ControladorBD
     // CREACION DE USUARIOS ______________________________________________
 
     // Metodo de insercion para crear un nuevo registro en la tabla usuario
-    public static function crearUsuario($nombre_usuario, $contrasena_hash, $nombre, $apellidos, $id_rol, $fecha_nacimiento)
+    public static function crearUsuario($nombre_usuario, $contrasena_hash, $nombre, $apellidos, $id_rol, $fecha_nacimiento, $email)
     {
-        $consulta = "INSERT INTO usuarios (nombre_usuario, contrasena_hash, nombre, apellidos, id_rol, fecha_nacimiento) VALUES (?, ?, ?, ?, ?, ?)";
-        return BaseDatos::consultaInsercion($consulta, $nombre_usuario, hash('sha256', $contrasena_hash), $nombre, $apellidos, $id_rol, $fecha_nacimiento);
+        $consulta = "INSERT INTO usuarios (nombre_usuario, contrasena_hash, nombre, apellidos, id_rol, fecha_nacimiento, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        return BaseDatos::consultaInsercion($consulta, $nombre_usuario, hash('sha256', $contrasena_hash), $nombre, $apellidos, $id_rol, $fecha_nacimiento, $email);
     }
 
     //METODOS DE LECTURA _____________________________________________________
@@ -150,13 +150,13 @@ class ControladorBD
     }
 
     // METODOS PARA CRUD DE ADMINISTRADORES EN PANEL DE USUARIOS ____________
-    //DEJO COMENTADO ESTE METODO PORQUE NO SE SI LO VAMOS A USAR, PERO SI QUEREMOS QUE UN ADMIN PUEDA CAMBIAR EL ROL DE OTRO USUARIO, PUEDE SER UTIL. SI NO, LO BORRAMOS Y YA ESTA.
+    // Para permitir que un admin pueda cambiar el rol de un usuario, corregir información por el usuario o a petición del mismo, o crear una nueva contraseña para el usuario si se ha olvidado y no puede entrar (ya que aún no hay sistema de olvido de contraseña planteado). También depende de qué datos se permiten cambiar libremente al usuario. Cualquier dato prohibido de modificación podrá ser cambiado siempre por un administrador.
 
-    /* public static function actualizarUsuario($id_usuario, $contrasena_hash, $nombre, $apellidos, $id_rol, $fecha_nacimiento) {
-         $consulta = "UPDATE usuarios SET contrasena_hash = ?, nombre_completo = ?, id_rol = ? WHERE id_usuario = ?";
-         return BaseDatos::consultaInsercion($consulta, hash('sha256', $contrasena_hash), $nombre, $apellidos, $id_rol, $fecha_nacimiento, $id_usuario);
+    public static function actualizarUsuario($id_usuario, $contrasena_hash, $nombre, $apellidos, $id_rol, $fecha_nacimiento, $correoElec) {
+         $consulta = "UPDATE usuarios SET contrasena_hash = ?, nombre = ?,  apellidos = ?, id_rol = ?, fecha_nacimiento =?, email = ? WHERE id_usuario = ?";
+         return BaseDatos::consultaInsercion($consulta, hash('sha256', $contrasena_hash), $nombre, $apellidos, $id_rol, $fecha_nacimiento, $correoElec, $id_usuario);
      }
-         */
+
 
     //METODOS DE ELIMINACION _____________________________________________________
 

@@ -14,6 +14,8 @@ $apellidosRegex = "/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,60}$/";
 // Contraseña: mínimo 8 caracteres, al menos una mayúscula, un número y un caracter especial
 $contrasenaRegex = "/^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W]).{8,}$/";
 
+
+
 // LIMITE DE EDAD CON PHP _______________________________________________
 $edadMinima = 16;
 // Fecha mínima permitida
@@ -21,7 +23,7 @@ $fechaMinimaNacimiento = new DateTime();
 $fechaMinimaNacimiento->modify("-{$edadMinima} years");
 
 
-if (isset($_POST['usuario']) && isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['fechaNac']) && isset($_POST['perfil']) && isset($_POST['contrasena'])) {
+if (isset($_POST['usuario']) && isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['fechaNac']) && isset($_POST['perfil']) && isset($_POST['contrasena']) && isset($_POST['email'])) {
 
     $usuario = trim($_POST['usuario']);
     $nombre = trim($_POST['nombre']);
@@ -29,9 +31,10 @@ if (isset($_POST['usuario']) && isset($_POST['nombre']) && isset($_POST['apellid
     $fechaNac = $_POST['fechaNac'];
     $perfil = strtolower($_POST['perfil']); // pasamos a minúscula
     $contrasena = $_POST['contrasena'];
+    $email = trim($_POST['email']);
 
     // Comprobamos que ninguna variable haya quedado nula o vacía
-    if (!$usuario|| !$nombre || !$apellidos || !$fechaNac || !$perfil || !$contrasena) {
+    if (!$usuario|| !$nombre || !$apellidos || !$fechaNac || !$perfil || !$contrasena || !$email) {
     $errores[] = "Todos los campos son obligatorios.";
     }
 
@@ -49,8 +52,17 @@ if (isset($_POST['usuario']) && isset($_POST['nombre']) && isset($_POST['apellid
         $errores[] = "La contraseña no es válida. Debe tener mínimo 8 caracteres, entre ellos una mayúscula, un número y un caracter no alfanumérico.";
     }
 
+   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+         $errores[] = "El formato del email es inválido";
+    }
+
     // Comprobamos que el perfil es válido con un añadido
-    $perfilesValidos = ['cliente','entrenador'];
+    $perfil = strtolower($_POST['perfil']);
+    if ($perfil !== 'administrador') {
+        $perfilesValidos = ['cliente','entrenador'];
+    } else {
+        $perfilesValidos = ['cliente','entrenador', 'administrador'];
+    }
     if (!in_array($perfil, $perfilesValidos)) {
         $errores[] = "Perfil no válido.";
     } else {
@@ -75,17 +87,31 @@ if (isset($_POST['usuario']) && isset($_POST['nombre']) && isset($_POST['apellid
 
     if (!empty($errores)) {
         $_SESSION['error'] = $errores;
-        header("Location: /Fitmemory/index.php?vista=crearUsuario");
+         if (isset($_POST['vista'])) {
+            // Guardamos el valor de vista
+            $vista = $_POST['vista'];
+            // El header recargara la vista que tengamos actualmente, esto permite que funcione para invitados y admin, reutilizando código
+            header("Location: /Fitmemory/index.php?vista=" . urlencode($vista));
+        }
         exit;
     } else {
-        ControladorBD::crearUsuario($usuario, $contrasena, $nombre, $apellidos, $id_rol, $fechaNac);
+        ControladorBD::crearUsuario($usuario, $contrasena, $nombre, $apellidos, $id_rol, $fechaNac, $email);
         $_SESSION['exito'] = 'Usuario creado correctamente.';
-        header("Location: /Fitmemory/index.php?vista=loginInicio");
+        if ($_SESSION['perfil'] == 'administrador') {
+            header("Location: /Fitmemory/index.php?vista=adminGestionUsuarios");
+        } else  {
+            header("Location: /Fitmemory/index.php?vista=loginInicio");
+        }
         exit;
     }
 
 } else {
-    header("Location: /Fitmemory/index.php?vista=crearUsuario");
+    if (isset($_POST['vista'])) {
+        // Guardamos el valor de vista
+        $vista = $_POST['vista'];
+        // El header recargara la vista que tengamos actualmente, esto permite que funcione para invitados y admin, reutilizando código
+        header("Location: /Fitmemory/index.php?vista=" . urlencode($vista));
+    }
     exit;
 }
 

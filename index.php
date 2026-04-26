@@ -5,7 +5,7 @@
 if(!defined('BASE_URL')) {
     define('BASE_URL', '/Fitmemory/');
 }
-// Requerimos las funciones
+// Requerimos las funciones y clases
 include_once 'src/controlador/controlador_BD.php';
 include_once 'src/controlador/cierre_funciones.php';
 include_once 'src/controlador/controlador_enrutador.php';

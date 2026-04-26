@@ -42,22 +42,20 @@ if (!isset($_SESSION['usuario'])) {
 
       <div class="container text-center mt-5 panel-dashboard">
 
-        <div class="dashboard-acciones dashboard-acciones-simple">
+        <div class="dashboard-acciones dashboard-acciones-dobles mb-3">
           <button
             class="btn btn-primary btn-lg d-flex align-items-center justify-content-center gap-2 dashboard-boton"
             type="button"
-            onclick="window.location.href='index.php?vista=gestionUsuarios'"
+            onclick="window.location.href='index.php?vista=adminGestionUsuarios'"
           >
             <i class="bi bi-person-gear"></i>
             Gestión de Usuarios
           </button>
-        </div>
 
-        <div class="dashboard-acciones dashboard-acciones-simple">
           <button
             class="btn btn-primary btn-lg d-flex align-items-center justify-content-center gap-2 dashboard-boton"
             type="button"
-            onclick="window.location.href='index.php?vista=gestionEntrenadores'"
+            onclick="window.location.href='index.php?vista=adminAsignarEntrenadores'"
           >
             <i class="bi bi-people"></i>
             Asignar Entrenadores
@@ -68,7 +66,7 @@ if (!isset($_SESSION['usuario'])) {
           <button
             class="btn btn-primary btn-lg d-flex align-items-center justify-content-center gap-2 dashboard-boton"
             type="button"
-            onclick="window.location.href='index.php?vista=gestionEjercicios'"
+            onclick="window.location.href='index.php?vista=adminGestionarEjercicios'"
           >
             <i class="bi bi-card-list"></i>
             Gestionar Ejercicios
